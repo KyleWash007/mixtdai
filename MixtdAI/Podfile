@@ -6,6 +6,7 @@ target 'MixtdAI' do
   use_frameworks!
 	pod 'Alamofire'
 	pod 'Kingfisher'
+  pod 'UIGradient'
 
   # Pods for MixtdAI
 
