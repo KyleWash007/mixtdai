@@ -8,9 +8,11 @@
 import UIKit
 
 class AddViewController: UIViewController {
-    var image1Data: UIImage?
-    var image2Data: UIImage?
-    var tappedImage: Int = 0
+    
+    var metadata1: MetaData?
+    var metadata2: MetaData?
+    var tappedmeta: Int = 1
+    
     @IBOutlet weak var image1: UIImageView!
     
     @IBOutlet weak var image2: UIImageView!
@@ -39,136 +41,36 @@ class AddViewController: UIViewController {
     }
     @objc func imageTapped1() {
         
-        
-        let actionSheetController: UIAlertController = UIAlertController(title: "Mixtd AI", message: "Choose any one option for upload image", preferredStyle: .actionSheet)
-        
-        // create an action
-        let firstAction: UIAlertAction = UIAlertAction(title: "Camera", style: .default) { action -> Void in
-            self.tappedImage = 1
-            self.camPick()
-        }
-        
-        let secondAction: UIAlertAction = UIAlertAction(title: "Photos", style: .default) { action -> Void in
-            self.tappedImage = 1
-            self.galleryPick()
-        }
-        
-        let cancelAction: UIAlertAction = UIAlertAction(title: "Cancel", style: .cancel) { action -> Void in }
-        
-        actionSheetController.addAction(firstAction)
-        actionSheetController.addAction(secondAction)
-        actionSheetController.addAction(cancelAction)
-       
-
-        self.present(actionSheetController, animated: true)
-        
+        let vc = UIStoryboard(name: "AddStoryboard", bundle: nil).instantiateViewController(withIdentifier: "MetaSelectionViewController") as! MetaSelectionViewController
+        self.tappedmeta = 1
+        vc.delegate = self
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     @objc func imageTapped2() {
-        
-        if self.image1Data == nil {
-            self.showAlert(message: "Please upload first image")
+        if self.metadata1 == nil {
+            self.showAlert(message: "Please upload first mixture data")
             return
         }
-        let actionSheetController: UIAlertController = UIAlertController(title: "Mixtd AI", message: "Choose any one option for upload image", preferredStyle: .actionSheet)
-        
-        // create an action
-        let firstAction: UIAlertAction = UIAlertAction(title: "Camera", style: .default) { action -> Void in
-            self.tappedImage = 2
-            self.camPick()
-        }
-        
-        let secondAction: UIAlertAction = UIAlertAction(title: "Photos", style: .default) { action -> Void in
-            self.tappedImage = 2
-            self.galleryPick()
-        }
-        
-        let cancelAction: UIAlertAction = UIAlertAction(title: "Cancel", style: .cancel) { action -> Void in }
-        
-        actionSheetController.addAction(firstAction)
-        actionSheetController.addAction(secondAction)
-        actionSheetController.addAction(cancelAction)
-       
-
-        self.present(actionSheetController, animated: true)
-        
+        let vc = UIStoryboard(name: "AddStoryboard", bundle: nil).instantiateViewController(withIdentifier: "MetaSelectionViewController") as! MetaSelectionViewController
+        self.tappedmeta = 2
+        vc.delegate = self
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     @IBAction func backAction(_ sender: Any) {
         self.navigationController?.popViewController(animated: true)
     }
 }
-extension AddViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate{
-   func galleryPick() {
-        if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
-            let imagePicker = UIImagePickerController()
-            imagePicker.allowsEditing = true
-            imagePicker.sourceType = .photoLibrary
-            
-            imagePicker.navigationBar.tintColor = .black
-            imagePicker.navigationBar.barStyle = .black
-            
-            self.present(imagePicker, animated: true, completion:nil)
-            imagePicker.delegate = self
-        } else {
-            showAlert(message: "You denied permissions to access your photos. You'll need to allow permissions to choose photos to post.")
 
+extension AddViewController : MetaSelectionDelegate {
+    func metaDataSelected(metaData: MetaData) {
+        if tappedmeta == 1 {
+            self.metadata1 = metaData
+            self.image1.image = metaData.image
         }
-        
-    }
-    func camPick() {
-         if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
-             let imagePicker = UIImagePickerController()
-             imagePicker.allowsEditing = true
-             imagePicker.sourceType = .camera
-             
-             imagePicker.navigationBar.tintColor = .black
-             imagePicker.navigationBar.barStyle = .black
-             
-             self.present(imagePicker, animated: true, completion:nil)
-             imagePicker.delegate = self
-         } else {
-             showAlert(message: "You denied permissions to access your camera. You'll need to allow permissions to choose photos to post.")
-         }
-         
-     }
-    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-        dismiss(animated: true, completion: nil)
+        else if tappedmeta == 2 {
+            self.metadata2 = metaData
+            self.image2.image = metaData.image
+        }
     }
     
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        if let imageUploaded = info[UIImagePickerController.InfoKey.editedImage] as? UIImage {
-            if self.tappedImage == 1 {
-                self.image1Data = imageUploaded
-            self.image1.image = imageUploaded
-            }else {
-                self.image2Data = imageUploaded
-                self.image2.image = imageUploaded
-            }
-//            pickedImage = imageUploaded
-//            self.img.image = imageUploaded
-
-        }else if let imageUploaded = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
-            if self.tappedImage == 1 {
-                self.image1Data = imageUploaded
-            self.image1.image = imageUploaded
-            }else {
-                self.image2Data = imageUploaded
-                self.image2.image = imageUploaded
-            }
-//            pickedImage = imageUploaded
-//            self.img.image = imageUploaded
-        }
-
-        dismiss(animated: true, completion: nil)
-    }
-    func showAlert(message:String) {
-        let alert = UIAlertController(
-            title: "Permission Denied",
-            message: message,
-            preferredStyle: .alert
-        )
-
-        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-
-        self.present(alert, animated: true, completion: nil)
-    }
 }

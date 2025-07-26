@@ -21,17 +21,29 @@
 		A38B6FA22E333DCF00BEB054 /* Exceptions for "MixtdAI" folder in "MixtdAI" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
+				Extension/UIViewControllerExtention.swift,
 				Info.plist,
 			);
 			target = A38B6F8C2E333DCD00BEB054 /* MixtdAI */;
 		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
+/* Begin PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet section */
+		A3986BF52E350065009C6F14 /* Exceptions for "MixtdAI" folder in "Copy Bundle Resources" phase from "MixtdAI" target */ = {
+			isa = PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet;
+			buildPhase = A38B6F8B2E333DCD00BEB054 /* Resources */;
+			membershipExceptions = (
+				Extension/UIViewControllerExtention.swift,
+			);
+		};
+/* End PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		A38B6F8F2E333DCD00BEB054 /* MixtdAI */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
 				A38B6FA22E333DCF00BEB054 /* Exceptions for "MixtdAI" folder in "MixtdAI" target */,
+				A3986BF52E350065009C6F14 /* Exceptions for "MixtdAI" folder in "Copy Bundle Resources" phase from "MixtdAI" target */,
 			);
 			path = MixtdAI;
 			sourceTree = "<group>";
