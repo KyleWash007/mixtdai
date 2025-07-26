@@ -11,9 +11,9 @@
         <!--Navigation Controller-->
         <scene sceneID="1Ik-sy-Bjd">
             <objects>
-                <navigationController id="BXX-K0-Fnb" sceneMemberID="viewController">
+                <navigationController navigationBarHidden="YES" id="BXX-K0-Fnb" sceneMemberID="viewController">
+                    <nil key="simulatedTopBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Bqy-oq-6lb">
-                        <rect key="frame" x="0.0" y="118" width="393" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>

@@ -92,6 +92,9 @@ class AddViewController: UIViewController {
         self.present(actionSheetController, animated: true)
         
     }
+    @IBAction func backAction(_ sender: Any) {
+        self.navigationController?.popViewController(animated: true)
+    }
 }
 extension AddViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate{
    func galleryPick() {
