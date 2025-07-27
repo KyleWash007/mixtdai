@@ -11,6 +11,7 @@ class AddMixDataDetailsVC: UIViewController {
     @IBOutlet weak var contentView: UIView!
     var mix: MixAIResponse!
     var image:URL?
+    var imageData:Data?
     private let scrollView = UIScrollView()
     private let contentStackView = UIStackView()
     
@@ -49,6 +50,41 @@ class AddMixDataDetailsVC: UIViewController {
     }
 
     private func setupContent() {
+        // 1. If there's an image URL, show the image
+        if let imageURL = image {
+            let imageContainer = UIView()
+            imageContainer.translatesAutoresizingMaskIntoConstraints = false
+
+            let imageView = UIImageView()
+            imageView.translatesAutoresizingMaskIntoConstraints = false
+            imageView.contentMode = .scaleAspectFill
+            imageView.clipsToBounds = true
+            imageView.layer.cornerRadius = 75
+            imageView.layer.masksToBounds = true
+
+            imageContainer.addSubview(imageView)
+
+            NSLayoutConstraint.activate([
+                imageView.widthAnchor.constraint(equalToConstant: 150),
+                imageView.heightAnchor.constraint(equalToConstant: 150),
+                imageView.centerXAnchor.constraint(equalTo: imageContainer.centerXAnchor),
+                imageView.topAnchor.constraint(equalTo: imageContainer.topAnchor),
+                imageView.bottomAnchor.constraint(equalTo: imageContainer.bottomAnchor)
+            ])
+
+            contentStackView.addArrangedSubview(imageContainer)
+
+            // Load image async
+            URLSession.shared.dataTask(with: imageURL) { data, _, error in
+                guard let data = data, let uiImage = UIImage(data: data), error == nil else { return }
+                DispatchQueue.main.async {
+                    self.imageData = data
+                    imageView.image = uiImage
+                }
+            }.resume()
+        }
+
+        // 2. Add text content
         let items: [(String, String)] = [
             ("What You Will Experience", mix.experience),
             ("What's the Science 🧬", mix.science),

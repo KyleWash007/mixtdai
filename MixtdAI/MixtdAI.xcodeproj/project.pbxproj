@@ -386,7 +386,7 @@
 				CODE_SIGN_ENTITLEMENTS = MixtdAI/MixtdAI.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 7;
 				DEVELOPMENT_TEAM = "";
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = UAEU5N39XX;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
@@ -424,7 +424,7 @@
 				CODE_SIGN_ENTITLEMENTS = MixtdAI/MixtdAI.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 7;
 				DEVELOPMENT_TEAM = "";
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = UAEU5N39XX;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;

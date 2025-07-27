@@ -90,7 +90,9 @@ extension AddViewController {
                 print("Image Prompt: \(mix.generatedImagePrompt)")
                 print("Suggested Name: \(mix.suggestedName)")
                 print("Improvement Tip: \(mix.improvementTip)")
-                self.chatService.generateImageURL(from: "genrate colorfull image of \(mix.suggestedName) of \(metadata1?.title ?? "") and \(metadata2?.title ?? "")") { imageResult in
+                self.chatService.generateImageURL(from: "genrate colorfull image of \(mix.suggestedName) of \(self.metadata1?.title ?? "") and \(self.metadata2?.title ?? "")") { imageResult in
+                    HUDManager.hideHUD()
+
                              switch imageResult {
                              case .success(let imageURL):
                                  DispatchQueue.main.async {
@@ -116,7 +118,7 @@ extension AddViewController {
             let mixVC = UIStoryboard(name: "AddStoryboard", bundle: nil).instantiateViewController(withIdentifier: "AddMixDataDetailsVC") as! AddMixDataDetailsVC
             mixVC.mix = mix
             mixVC.image = image
-
+            print(image?.absoluteString)
             self.navigationController?.pushViewController(mixVC, animated: true)
         }
     }
