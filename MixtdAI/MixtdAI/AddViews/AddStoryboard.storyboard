@@ -103,6 +103,7 @@
                     <connections>
                         <outlet property="image1" destination="XRr-Qf-SFg" id="PK7-GM-oSP"/>
                         <outlet property="image2" destination="orJ-uf-wb6" id="hpA-MK-oMD"/>
+                        <outlet property="image3" destination="eJp-Ua-YCZ" id="PCd-Pl-GrI"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1DG-zR-9zI" sceneMemberID="firstResponder"/>

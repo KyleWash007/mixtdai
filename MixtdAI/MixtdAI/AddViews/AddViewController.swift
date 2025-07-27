@@ -17,7 +17,8 @@ class AddViewController: UIViewController {
     
     @IBOutlet weak var image2: UIImageView!
     
-    
+    @IBOutlet weak var image3: UIImageView!
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -38,6 +39,14 @@ class AddViewController: UIViewController {
                // Add the gesture to the image view
         image2.addGestureRecognizer(tapGesture2)
         
+        image3.isUserInteractionEnabled = true
+               
+               // Create gesture recognizer
+        let tapGesture3 = UITapGestureRecognizer(target: self, action: #selector(imageTapped3))
+               
+               // Add the gesture to the image view
+        image3.addGestureRecognizer(tapGesture3)
+        
     }
     @objc func imageTapped1() {
         
@@ -55,6 +64,10 @@ class AddViewController: UIViewController {
         self.tappedmeta = 2
         vc.delegate = self
         self.navigationController?.pushViewController(vc, animated: true)
+    }
+    @objc func imageTapped3() {
+        self.showAlert(message: "Under Development, Coming Soon!")
+        
     }
     @IBAction func backAction(_ sender: Any) {
         self.navigationController?.popViewController(animated: true)

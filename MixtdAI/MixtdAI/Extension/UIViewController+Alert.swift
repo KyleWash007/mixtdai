@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 extension UIViewController {
-    func showAlert(message: String, title: String = "Permission Denied") {
+    func showAlert(message: String, title: String = "") {
         let alert = UIAlertController(
             title: title,
             message: message,
