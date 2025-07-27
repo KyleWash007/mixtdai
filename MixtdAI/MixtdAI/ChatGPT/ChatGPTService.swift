@@ -11,6 +11,7 @@ import UIKit
 // MARK: - ChatGPT API Service
 class ChatGPTService {
     private let apiUrl = "https://api.openai.com/v1/chat/completions"
+    let apiKey = ""
 
     func sendMessage(_ text: String, completion: @escaping (String) -> Void) {
         guard let url = URL(string: apiUrl) else { return }
