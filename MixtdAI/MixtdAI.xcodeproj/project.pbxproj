@@ -8,35 +8,66 @@
 
 /* Begin PBXBuildFile section */
 		6CD785F31991041F1FA4448D /* Pods_MixtdAI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB4703772FCD10C289EEF960 /* Pods_MixtdAI.framework */; };
+		A3986D782E363917009C6F14 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A3986D6B2E363917009C6F14 /* Assets.xcassets */; };
+		A3986D792E363917009C6F14 /* AddStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A3986D572E363917009C6F14 /* AddStoryboard.storyboard */; };
+		A3986D7A2E363917009C6F14 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A3986D702E363917009C6F14 /* LaunchScreen.storyboard */; };
+		A3986D7B2E363917009C6F14 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A3986D722E363917009C6F14 /* Main.storyboard */; };
+		A3986D7C2E363917009C6F14 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3986D6D2E363917009C6F14 /* HomeViewController.swift */; };
+		A3986D7D2E363917009C6F14 /* StringExtention.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3986D612E363917009C6F14 /* StringExtention.swift */; };
+		A3986D7E2E363917009C6F14 /* Uiimage+Extention.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3986D642E363917009C6F14 /* Uiimage+Extention.swift */; };
+		A3986D7F2E363917009C6F14 /* ImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3986D5F2E363917009C6F14 /* ImageExtension.swift */; };
+		A3986D802E363917009C6F14 /* UIViewController+Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3986D672E363917009C6F14 /* UIViewController+Alert.swift */; };
+		A3986D812E363917009C6F14 /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3986D682E363917009C6F14 /* UIViewExtension.swift */; };
+		A3986D822E363917009C6F14 /* UIDevice+Extention.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3986D632E363917009C6F14 /* UIDevice+Extention.swift */; };
+		A3986D832E363917009C6F14 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3986D6A2E363917009C6F14 /* AppDelegate.swift */; };
+		A3986D842E363917009C6F14 /* UIImage+Rotate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3986D5C2E363917009C6F14 /* UIImage+Rotate.swift */; };
+		A3986D852E363917009C6F14 /* UIView+extention.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3986D662E363917009C6F14 /* UIView+extention.swift */; };
+		A3986D862E363917009C6F14 /* UILabel+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3986D652E363917009C6F14 /* UILabel+Extensions.swift */; };
+		A3986D872E363917009C6F14 /* AddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3986D582E363917009C6F14 /* AddViewController.swift */; };
+		A3986D882E363917009C6F14 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3986D752E363917009C6F14 /* SceneDelegate.swift */; };
+		A3986D892E363917009C6F14 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3986D622E363917009C6F14 /* UIColor+Extension.swift */; };
+		A3986D8A2E363917009C6F14 /* iOSDevCenters+GIF.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3986D602E363917009C6F14 /* iOSDevCenters+GIF.swift */; };
+		A3986D8B2E363917009C6F14 /* MetaSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3986D592E363917009C6F14 /* MetaSelectionViewController.swift */; };
+		A3986D8C2E363917009C6F14 /* Comet.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3986D5B2E363917009C6F14 /* Comet.swift */; };
+		A3986D8D2E363917009C6F14 /* DebugLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3986D6C2E363917009C6F14 /* DebugLog.swift */; };
+		A3986D8E2E363917009C6F14 /* MixtdAI.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A3986D742E363917009C6F14 /* MixtdAI.xcdatamodeld */; };
+		A3986D942E363C95009C6F14 /* ChatGPTService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3986D922E363C95009C6F14 /* ChatGPTService.swift */; };
+		A3986D982E363E97009C6F14 /* HUDManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3986D972E363E97009C6F14 /* HUDManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		66718288F766C59DC53326FD /* Pods-MixtdAI.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MixtdAI.debug.xcconfig"; path = "Target Support Files/Pods-MixtdAI/Pods-MixtdAI.debug.xcconfig"; sourceTree = "<group>"; };
 		A38B6F8D2E333DCD00BEB054 /* MixtdAI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MixtdAI.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A3986D572E363917009C6F14 /* AddStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AddStoryboard.storyboard; sourceTree = "<group>"; };
+		A3986D582E363917009C6F14 /* AddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddViewController.swift; sourceTree = "<group>"; };
+		A3986D592E363917009C6F14 /* MetaSelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetaSelectionViewController.swift; sourceTree = "<group>"; };
+		A3986D5B2E363917009C6F14 /* Comet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comet.swift; sourceTree = "<group>"; };
+		A3986D5C2E363917009C6F14 /* UIImage+Rotate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Rotate.swift"; sourceTree = "<group>"; };
+		A3986D5F2E363917009C6F14 /* ImageExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageExtension.swift; sourceTree = "<group>"; };
+		A3986D602E363917009C6F14 /* iOSDevCenters+GIF.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "iOSDevCenters+GIF.swift"; sourceTree = "<group>"; };
+		A3986D612E363917009C6F14 /* StringExtention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtention.swift; sourceTree = "<group>"; };
+		A3986D622E363917009C6F14 /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
+		A3986D632E363917009C6F14 /* UIDevice+Extention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDevice+Extention.swift"; sourceTree = "<group>"; };
+		A3986D642E363917009C6F14 /* Uiimage+Extention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Uiimage+Extention.swift"; sourceTree = "<group>"; };
+		A3986D652E363917009C6F14 /* UILabel+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Extensions.swift"; sourceTree = "<group>"; };
+		A3986D662E363917009C6F14 /* UIView+extention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+extention.swift"; sourceTree = "<group>"; };
+		A3986D672E363917009C6F14 /* UIViewController+Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Alert.swift"; sourceTree = "<group>"; };
+		A3986D682E363917009C6F14 /* UIViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
+		A3986D6A2E363917009C6F14 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		A3986D6B2E363917009C6F14 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		A3986D6C2E363917009C6F14 /* DebugLog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugLog.swift; sourceTree = "<group>"; };
+		A3986D6D2E363917009C6F14 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		A3986D6E2E363917009C6F14 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A3986D6F2E363917009C6F14 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		A3986D712E363917009C6F14 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		A3986D732E363917009C6F14 /* MixtdAI.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MixtdAI.entitlements; sourceTree = "<group>"; };
+		A3986D752E363917009C6F14 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		A3986D772E363917009C6F14 /* MixtdAI.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MixtdAI.xcdatamodel; sourceTree = "<group>"; };
+		A3986D922E363C95009C6F14 /* ChatGPTService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatGPTService.swift; sourceTree = "<group>"; };
+		A3986D972E363E97009C6F14 /* HUDManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HUDManager.swift; sourceTree = "<group>"; };
 		BB4703772FCD10C289EEF960 /* Pods_MixtdAI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MixtdAI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BD77AE624F8D58280FCD5C01 /* Pods-MixtdAI.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MixtdAI.release.xcconfig"; path = "Target Support Files/Pods-MixtdAI/Pods-MixtdAI.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
-
-/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		A38B6FA22E333DCF00BEB054 /* Exceptions for "MixtdAI" folder in "MixtdAI" target */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				Info.plist,
-			);
-			target = A38B6F8C2E333DCD00BEB054 /* MixtdAI */;
-		};
-/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
-
-/* Begin PBXFileSystemSynchronizedRootGroup section */
-		A38B6F8F2E333DCD00BEB054 /* MixtdAI */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			exceptions = (
-				A38B6FA22E333DCF00BEB054 /* Exceptions for "MixtdAI" folder in "MixtdAI" target */,
-			);
-			path = MixtdAI;
-			sourceTree = "<group>";
-		};
-/* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		A38B6F8A2E333DCD00BEB054 /* Frameworks */ = {
@@ -61,7 +92,8 @@
 		A38B6F842E333DCD00BEB054 = {
 			isa = PBXGroup;
 			children = (
-				A38B6F8F2E333DCD00BEB054 /* MixtdAI */,
+				A3986D762E363917009C6F14 /* MixtdAI */,
+				A3986CA72E3638DE009C6F14 /* New Group */,
 				A38B6F8E2E333DCD00BEB054 /* Products */,
 				C34326D01BD11262C7CA57D3 /* Pods */,
 				2D89519C6A0FA1EA7C94CBD9 /* Frameworks */,
@@ -74,6 +106,95 @@
 				A38B6F8D2E333DCD00BEB054 /* MixtdAI.app */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		A3986CA72E3638DE009C6F14 /* New Group */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "New Group";
+			sourceTree = "<group>";
+		};
+		A3986D5A2E363917009C6F14 /* AddViews */ = {
+			isa = PBXGroup;
+			children = (
+				A3986D572E363917009C6F14 /* AddStoryboard.storyboard */,
+				A3986D582E363917009C6F14 /* AddViewController.swift */,
+				A3986D592E363917009C6F14 /* MetaSelectionViewController.swift */,
+			);
+			path = AddViews;
+			sourceTree = "<group>";
+		};
+		A3986D5D2E363917009C6F14 /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				A3986D5B2E363917009C6F14 /* Comet.swift */,
+				A3986D5C2E363917009C6F14 /* UIImage+Rotate.swift */,
+			);
+			path = Sources;
+			sourceTree = "<group>";
+		};
+		A3986D5E2E363917009C6F14 /* Comet */ = {
+			isa = PBXGroup;
+			children = (
+				A3986D5D2E363917009C6F14 /* Sources */,
+			);
+			path = Comet;
+			sourceTree = "<group>";
+		};
+		A3986D692E363917009C6F14 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				A3986D5F2E363917009C6F14 /* ImageExtension.swift */,
+				A3986D602E363917009C6F14 /* iOSDevCenters+GIF.swift */,
+				A3986D612E363917009C6F14 /* StringExtention.swift */,
+				A3986D622E363917009C6F14 /* UIColor+Extension.swift */,
+				A3986D632E363917009C6F14 /* UIDevice+Extention.swift */,
+				A3986D642E363917009C6F14 /* Uiimage+Extention.swift */,
+				A3986D652E363917009C6F14 /* UILabel+Extensions.swift */,
+				A3986D662E363917009C6F14 /* UIView+extention.swift */,
+				A3986D672E363917009C6F14 /* UIViewController+Alert.swift */,
+				A3986D682E363917009C6F14 /* UIViewExtension.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
+		A3986D762E363917009C6F14 /* MixtdAI */ = {
+			isa = PBXGroup;
+			children = (
+				A3986D962E363E92009C6F14 /* Utility */,
+				A3986D932E363C95009C6F14 /* ChatGPT */,
+				A3986D5A2E363917009C6F14 /* AddViews */,
+				A3986D5E2E363917009C6F14 /* Comet */,
+				A3986D692E363917009C6F14 /* Extension */,
+				A3986D6A2E363917009C6F14 /* AppDelegate.swift */,
+				A3986D6B2E363917009C6F14 /* Assets.xcassets */,
+				A3986D6C2E363917009C6F14 /* DebugLog.swift */,
+				A3986D6D2E363917009C6F14 /* HomeViewController.swift */,
+				A3986D6E2E363917009C6F14 /* Info.plist */,
+				A3986D702E363917009C6F14 /* LaunchScreen.storyboard */,
+				A3986D722E363917009C6F14 /* Main.storyboard */,
+				A3986D732E363917009C6F14 /* MixtdAI.entitlements */,
+				A3986D742E363917009C6F14 /* MixtdAI.xcdatamodeld */,
+				A3986D752E363917009C6F14 /* SceneDelegate.swift */,
+			);
+			path = MixtdAI;
+			sourceTree = "<group>";
+		};
+		A3986D932E363C95009C6F14 /* ChatGPT */ = {
+			isa = PBXGroup;
+			children = (
+				A3986D922E363C95009C6F14 /* ChatGPTService.swift */,
+			);
+			path = ChatGPT;
+			sourceTree = "<group>";
+		};
+		A3986D962E363E92009C6F14 /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+				A3986D972E363E97009C6F14 /* HUDManager.swift */,
+			);
+			path = Utility;
 			sourceTree = "<group>";
 		};
 		C34326D01BD11262C7CA57D3 /* Pods */ = {
@@ -101,9 +222,6 @@
 			buildRules = (
 			);
 			dependencies = (
-			);
-			fileSystemSynchronizedGroups = (
-				A38B6F8F2E333DCD00BEB054 /* MixtdAI */,
 			);
 			name = MixtdAI;
 			productName = MixtdAI;
@@ -149,6 +267,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A3986D782E363917009C6F14 /* Assets.xcassets in Resources */,
+				A3986D792E363917009C6F14 /* AddStoryboard.storyboard in Resources */,
+				A3986D7A2E363917009C6F14 /* LaunchScreen.storyboard in Resources */,
+				A3986D7B2E363917009C6F14 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -185,13 +307,9 @@
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-MixtdAI/Pods-MixtdAI-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
-			inputPaths = (
-			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-MixtdAI/Pods-MixtdAI-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -205,10 +323,50 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A3986D7C2E363917009C6F14 /* HomeViewController.swift in Sources */,
+				A3986D7D2E363917009C6F14 /* StringExtention.swift in Sources */,
+				A3986D7E2E363917009C6F14 /* Uiimage+Extention.swift in Sources */,
+				A3986D7F2E363917009C6F14 /* ImageExtension.swift in Sources */,
+				A3986D802E363917009C6F14 /* UIViewController+Alert.swift in Sources */,
+				A3986D812E363917009C6F14 /* UIViewExtension.swift in Sources */,
+				A3986D822E363917009C6F14 /* UIDevice+Extention.swift in Sources */,
+				A3986D8E2E363917009C6F14 /* MixtdAI.xcdatamodeld in Sources */,
+				A3986D832E363917009C6F14 /* AppDelegate.swift in Sources */,
+				A3986D842E363917009C6F14 /* UIImage+Rotate.swift in Sources */,
+				A3986D852E363917009C6F14 /* UIView+extention.swift in Sources */,
+				A3986D862E363917009C6F14 /* UILabel+Extensions.swift in Sources */,
+				A3986D872E363917009C6F14 /* AddViewController.swift in Sources */,
+				A3986D882E363917009C6F14 /* SceneDelegate.swift in Sources */,
+				A3986D892E363917009C6F14 /* UIColor+Extension.swift in Sources */,
+				A3986D8A2E363917009C6F14 /* iOSDevCenters+GIF.swift in Sources */,
+				A3986D8B2E363917009C6F14 /* MetaSelectionViewController.swift in Sources */,
+				A3986D8C2E363917009C6F14 /* Comet.swift in Sources */,
+				A3986D982E363E97009C6F14 /* HUDManager.swift in Sources */,
+				A3986D8D2E363917009C6F14 /* DebugLog.swift in Sources */,
+				A3986D942E363C95009C6F14 /* ChatGPTService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		A3986D702E363917009C6F14 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A3986D6F2E363917009C6F14 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		A3986D722E363917009C6F14 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A3986D712E363917009C6F14 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		A38B6FA42E333DCF00BEB054 /* Debug */ = {
@@ -428,6 +586,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		A3986D742E363917009C6F14 /* MixtdAI.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				A3986D772E363917009C6F14 /* MixtdAI.xcdatamodel */,
+			);
+			currentVersion = A3986D772E363917009C6F14 /* MixtdAI.xcdatamodel */;
+			path = MixtdAI.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = A38B6F852E333DCD00BEB054 /* Project object */;
 }

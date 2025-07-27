@@ -8,6 +8,7 @@ target 'MixtdAI' do
 	pod 'Kingfisher'
   pod 'UIGradient'
   pod 'IQKeyboardManagerSwift’
+  pod 'SVProgressHUD'
 
   # Pods for MixtdAI
 

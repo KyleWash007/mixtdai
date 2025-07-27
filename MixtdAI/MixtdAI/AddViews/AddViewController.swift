@@ -12,7 +12,8 @@ class AddViewController: UIViewController {
     var metadata1: MetaData?
     var metadata2: MetaData?
     var tappedmeta: Int = 1
-    
+    private let chatService = ChatGPTService()
+
     @IBOutlet weak var image1: UIImageView!
     
     @IBOutlet weak var image2: UIImageView!
@@ -22,40 +23,18 @@ class AddViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
-        image1.isUserInteractionEnabled = true
-               
-               // Create gesture recognizer
-        let tapGesture1 = UITapGestureRecognizer(target: self, action: #selector(imageTapped1))
-               
-               // Add the gesture to the image view
-        image1.addGestureRecognizer(tapGesture1)
-        
-        image2.isUserInteractionEnabled = true
-               
-               // Create gesture recognizer
-        let tapGesture2 = UITapGestureRecognizer(target: self, action: #selector(imageTapped2))
-               
-               // Add the gesture to the image view
-        image2.addGestureRecognizer(tapGesture2)
-        
-        image3.isUserInteractionEnabled = true
-               
-               // Create gesture recognizer
-        let tapGesture3 = UITapGestureRecognizer(target: self, action: #selector(imageTapped3))
-               
-               // Add the gesture to the image view
-        image3.addGestureRecognizer(tapGesture3)
-        
     }
-    @objc func imageTapped1() {
+    
+    @IBAction func stepAction1(_ sender: Any) {
         
         let vc = UIStoryboard(name: "AddStoryboard", bundle: nil).instantiateViewController(withIdentifier: "MetaSelectionViewController") as! MetaSelectionViewController
         self.tappedmeta = 1
         vc.delegate = self
         self.navigationController?.pushViewController(vc, animated: true)
     }
-    @objc func imageTapped2() {
+    
+    @IBAction func stepAction2(_ sender: Any) {
+  
         if self.metadata1 == nil {
             self.showAlert(message: "Please upload first mixture data")
             return
@@ -65,8 +44,16 @@ class AddViewController: UIViewController {
         vc.delegate = self
         self.navigationController?.pushViewController(vc, animated: true)
     }
-    @objc func imageTapped3() {
-        self.showAlert(message: "Under Development, Coming Soon!")
+    @IBAction func stepAction3(_ sender: Any) {
+        if self.metadata1 == nil {
+            self.showAlert(message: "Please upload first mixture data")
+            return
+        }
+        if self.metadata2 == nil {
+            self.showAlert(message: "Please upload second mixture data")
+            return
+        }
+        self.getMixAIResponse()
         
     }
     @IBAction func backAction(_ sender: Any) {
@@ -86,4 +73,25 @@ extension AddViewController : MetaSelectionDelegate {
         }
     }
     
+}
+extension AddViewController {
+    func getMixAIResponse() {
+        
+        let ingredient1 = "\(metadata1?.title ?? "") \(metadata1?.description ?? "")"
+        let ingredient2 = "\(metadata2?.title ?? "") \(metadata2?.description ?? "")"
+
+        self.chatService.generateMixAIResponse(ingredient1: ingredient1, ingredient2: ingredient2) { result in
+            switch result {
+            case .success(let mix):
+                print("Experience: \(mix.experience)")
+                print("Science: \(mix.science)")
+                print("Similar To: \(mix.similarTo)")
+                print("Image Prompt: \(mix.generatedImagePrompt)")
+                print("Suggested Name: \(mix.suggestedName)")
+                print("Improvement Tip: \(mix.improvementTip)")
+            case .failure(let error):
+                print("Error: \(error)")
+            }
+        }
+    }
 }
