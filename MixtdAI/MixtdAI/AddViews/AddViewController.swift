@@ -81,7 +81,6 @@ extension AddViewController {
         let ingredient2 = "\(metadata2?.title ?? "") \(metadata2?.description ?? "")"
         HUDManager.showHUD()
         self.chatService.generateMixAIResponse(ingredient1: ingredient1, ingredient2: ingredient2) { result in
-            HUDManager.hideHUD()
             
             switch result {
             case .success(let mix):
@@ -91,15 +90,34 @@ extension AddViewController {
                 print("Image Prompt: \(mix.generatedImagePrompt)")
                 print("Suggested Name: \(mix.suggestedName)")
                 print("Improvement Tip: \(mix.improvementTip)")
-                DispatchQueue.main.async {
-                    let mixVC = UIStoryboard(name: "AddStoryboard", bundle: nil).instantiateViewController(withIdentifier: "AddMixDataDetailsVC") as! AddMixDataDetailsVC
+                self.chatService.generateImageURL(from: "genrate colorfull image of \(mix.suggestedName) of \(metadata1?.title ?? "") and \(metadata2?.title ?? "")") { imageResult in
+                             switch imageResult {
+                             case .success(let imageURL):
+                                 DispatchQueue.main.async {
+                                     self.showDetails(mix: mix, image: imageURL)
+                                 }
+                             case .failure(let error):
+                                 print("Image generation failed: \(error)")
+                                 DispatchQueue.main.async {
+                                     self.showDetails(mix: mix, image: nil) // fallback
+                                 }
+                             }
+                         }
 
-                    mixVC.mix = mix
-                    self.navigationController?.pushViewController(mixVC, animated: true)
-                }
             case .failure(let error):
+                HUDManager.hideHUD()
+
                 print("Error: \(error)")
             }
+        }
+    }
+    func showDetails(mix:MixAIResponse,image:URL?) {
+        DispatchQueue.main.async {
+            let mixVC = UIStoryboard(name: "AddStoryboard", bundle: nil).instantiateViewController(withIdentifier: "AddMixDataDetailsVC") as! AddMixDataDetailsVC
+            mixVC.mix = mix
+            mixVC.image = image
+
+            self.navigationController?.pushViewController(mixVC, animated: true)
         }
     }
 }

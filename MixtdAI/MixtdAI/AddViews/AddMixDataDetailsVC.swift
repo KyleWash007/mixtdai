@@ -10,7 +10,7 @@ import UIKit
 class AddMixDataDetailsVC: UIViewController {
     @IBOutlet weak var contentView: UIView!
     var mix: MixAIResponse!
-
+    var image:URL?
     private let scrollView = UIScrollView()
     private let contentStackView = UIStackView()
     
