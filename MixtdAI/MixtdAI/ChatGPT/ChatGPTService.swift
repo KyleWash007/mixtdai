@@ -11,7 +11,7 @@ import UIKit
 // MARK: - ChatGPT API Service
 class ChatGPTService {
     private let apiUrl = "https://api.openai.com/v1/chat/completions"
-    let apiKey = "sk-proj-wxnHcU5njVLyvZYBCaPRT3BlbkFJOq8eA6xQ8cp2EifqUTRh"
+    let apiKey = "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"
 
     func sendMessage(_ text: String, completion: @escaping (String) -> Void) {
         guard let url = URL(string: apiUrl) else { return }
@@ -54,7 +54,7 @@ class ChatGPTService {
 
     func generateMixAIResponse(ingredient1: String, ingredient2: String, completion: @escaping (Result<MixAIResponse, Error>) -> Void) {
         let prompt = """
-        I am building a cocktail AI assistant. I will provide two mix ingredients. For each mix, generate a JSON object with the following six keys and creative responses:
+        I am building a cocktail AI assistant. I will provide two mix ingredients.Each key must contain at least 240 words of detailed and meaningful information.For each mix, generate a JSON object with the following six keys and creative responses:
 
         1. experience — A short, valid description of what someone will experience when tasting the mix.
         2. science — A simplified explanation of the flavor chemistry or interaction between the ingredients.
@@ -149,6 +149,42 @@ class ChatGPTService {
             completion(.failure(error))
         }
     }
+    func generateImageURL(from prompt: String, completion: @escaping (Result<URL, Error>) -> Void) {
+        let url = URL(string: "https://api.openai.com/v1/images/generations")!
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.addValue("Bearer \(self.apiKey)", forHTTPHeaderField: "Authorization")
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+
+        let body: [String: Any] = [
+            "model": "dall-e-3",
+            "prompt": prompt,
+            "n": 1,
+            "size": "1024x1024"
+        ]
+
+        request.httpBody = try? JSONSerialization.data(withJSONObject: body)
+
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            if let error = error {
+                completion(.failure(error))
+                return
+            }
+
+            guard let data = data,
+                  let json = try? JSONSerialization.jsonObject(with: data) as? [String: Any],
+                  let dataArray = json["data"] as? [[String: Any]],
+                  let first = dataArray.first,
+                  let urlString = first["url"] as? String,
+                  let imageURL = URL(string: urlString) else {
+                completion(.failure(NSError(domain: "ImageParse", code: 0)))
+                return
+            }
+
+            completion(.success(imageURL))
+        }.resume()
+    }
+
 }
 
 // MARK: - Models

@@ -348,6 +348,71 @@
             </objects>
             <point key="canvasLocation" x="894" y="-19"/>
         </scene>
+        <!--Add Mix Data DetailsVC-->
+        <scene sceneID="ajw-ao-SKd">
+            <objects>
+                <viewController storyboardIdentifier="AddMixDataDetailsVC" id="BIp-a7-W1n" customClass="AddMixDataDetailsVC" customModule="MixtdAI" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="IUF-HI-wBc">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4Of-Ya-AWP">
+                                <rect key="frame" x="0.0" y="118" width="393" height="64"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MIXTD" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0fx-zH-lSJ">
+                                        <rect key="frame" x="151.66666666666666" y="13.666666666666657" width="90" height="37"/>
+                                        <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="27"/>
+                                        <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lXU-Nn-3QA">
+                                        <rect key="frame" x="0.0" y="0.0" width="64" height="64"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="64" id="B1g-jA-VJB"/>
+                                            <constraint firstAttribute="height" constant="64" id="Qnd-90-rlV"/>
+                                        </constraints>
+                                        <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" image="chevron.backward" catalog="system"/>
+                                        <connections>
+                                            <action selector="backAction:" destination="BIp-a7-W1n" eventType="touchUpInside" id="DIa-Jz-BRw"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="0fx-zH-lSJ" firstAttribute="centerX" secondItem="4Of-Ya-AWP" secondAttribute="centerX" id="69M-GG-zYH"/>
+                                    <constraint firstAttribute="height" constant="64" id="VT4-77-H4Y"/>
+                                    <constraint firstItem="lXU-Nn-3QA" firstAttribute="leading" secondItem="4Of-Ya-AWP" secondAttribute="leading" id="YTO-dz-JuZ"/>
+                                    <constraint firstItem="0fx-zH-lSJ" firstAttribute="centerY" secondItem="4Of-Ya-AWP" secondAttribute="centerY" id="c5C-48-GP6"/>
+                                    <constraint firstItem="lXU-Nn-3QA" firstAttribute="top" secondItem="4Of-Ya-AWP" secondAttribute="top" id="xiU-la-Bdp"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="t6c-pF-Tdm">
+                                <rect key="frame" x="0.0" y="182" width="393" height="602"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="Rjb-sX-nxg"/>
+                        <color key="backgroundColor" red="0.96470588239999999" green="0.96078431369999995" blue="0.94901960780000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="t6c-pF-Tdm" firstAttribute="top" secondItem="4Of-Ya-AWP" secondAttribute="bottom" id="4rr-QL-pZi"/>
+                            <constraint firstItem="Rjb-sX-nxg" firstAttribute="trailing" secondItem="t6c-pF-Tdm" secondAttribute="trailing" id="Er4-gw-Urr"/>
+                            <constraint firstItem="4Of-Ya-AWP" firstAttribute="top" secondItem="Rjb-sX-nxg" secondAttribute="top" id="MQd-i6-R6p"/>
+                            <constraint firstItem="4Of-Ya-AWP" firstAttribute="leading" secondItem="Rjb-sX-nxg" secondAttribute="leading" id="YxZ-Sb-0ab"/>
+                            <constraint firstItem="Rjb-sX-nxg" firstAttribute="trailing" secondItem="4Of-Ya-AWP" secondAttribute="trailing" id="kJD-69-nhZ"/>
+                            <constraint firstItem="t6c-pF-Tdm" firstAttribute="leading" secondItem="Rjb-sX-nxg" secondAttribute="leading" id="pDz-Vc-G4k"/>
+                            <constraint firstItem="Rjb-sX-nxg" firstAttribute="bottom" secondItem="t6c-pF-Tdm" secondAttribute="bottom" id="yvH-zM-HPJ"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="contentView" destination="t6c-pF-Tdm" id="6az-ns-cll"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dJk-Mg-W9j" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1622" y="-19"/>
+        </scene>
     </scenes>
     <resources>
         <image name="1" width="1637" height="2048"/>

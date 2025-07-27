@@ -33,6 +33,7 @@
 		A3986D8E2E363917009C6F14 /* MixtdAI.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A3986D742E363917009C6F14 /* MixtdAI.xcdatamodeld */; };
 		A3986D942E363C95009C6F14 /* ChatGPTService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3986D922E363C95009C6F14 /* ChatGPTService.swift */; };
 		A3986D982E363E97009C6F14 /* HUDManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3986D972E363E97009C6F14 /* HUDManager.swift */; };
+		A3986D9C2E3655DB009C6F14 /* AddMixDataDetailsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3986D9B2E3655DB009C6F14 /* AddMixDataDetailsVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -65,6 +66,7 @@
 		A3986D772E363917009C6F14 /* MixtdAI.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MixtdAI.xcdatamodel; sourceTree = "<group>"; };
 		A3986D922E363C95009C6F14 /* ChatGPTService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatGPTService.swift; sourceTree = "<group>"; };
 		A3986D972E363E97009C6F14 /* HUDManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HUDManager.swift; sourceTree = "<group>"; };
+		A3986D9B2E3655DB009C6F14 /* AddMixDataDetailsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMixDataDetailsVC.swift; sourceTree = "<group>"; };
 		BB4703772FCD10C289EEF960 /* Pods_MixtdAI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MixtdAI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BD77AE624F8D58280FCD5C01 /* Pods-MixtdAI.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MixtdAI.release.xcconfig"; path = "Target Support Files/Pods-MixtdAI/Pods-MixtdAI.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -118,6 +120,7 @@
 		A3986D5A2E363917009C6F14 /* AddViews */ = {
 			isa = PBXGroup;
 			children = (
+				A3986D9B2E3655DB009C6F14 /* AddMixDataDetailsVC.swift */,
 				A3986D572E363917009C6F14 /* AddStoryboard.storyboard */,
 				A3986D582E363917009C6F14 /* AddViewController.swift */,
 				A3986D592E363917009C6F14 /* MetaSelectionViewController.swift */,
@@ -307,9 +310,13 @@
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-MixtdAI/Pods-MixtdAI-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
+			inputPaths = (
+			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-MixtdAI/Pods-MixtdAI-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -323,6 +330,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A3986D9C2E3655DB009C6F14 /* AddMixDataDetailsVC.swift in Sources */,
 				A3986D7C2E363917009C6F14 /* HomeViewController.swift in Sources */,
 				A3986D7D2E363917009C6F14 /* StringExtention.swift in Sources */,
 				A3986D7E2E363917009C6F14 /* Uiimage+Extention.swift in Sources */,

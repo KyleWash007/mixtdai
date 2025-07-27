@@ -13,16 +13,16 @@ class AddViewController: UIViewController {
     var metadata2: MetaData?
     var tappedmeta: Int = 1
     private let chatService = ChatGPTService()
-
+    
     @IBOutlet weak var image1: UIImageView!
     
     @IBOutlet weak var image2: UIImageView!
     
     @IBOutlet weak var image3: UIImageView!
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
     }
     
     @IBAction func stepAction1(_ sender: Any) {
@@ -34,7 +34,7 @@ class AddViewController: UIViewController {
     }
     
     @IBAction func stepAction2(_ sender: Any) {
-  
+        
         if self.metadata1 == nil {
             self.showAlert(message: "Please upload first mixture data")
             return
@@ -79,8 +79,10 @@ extension AddViewController {
         
         let ingredient1 = "\(metadata1?.title ?? "") \(metadata1?.description ?? "")"
         let ingredient2 = "\(metadata2?.title ?? "") \(metadata2?.description ?? "")"
-
+        HUDManager.showHUD()
         self.chatService.generateMixAIResponse(ingredient1: ingredient1, ingredient2: ingredient2) { result in
+            HUDManager.hideHUD()
+            
             switch result {
             case .success(let mix):
                 print("Experience: \(mix.experience)")
@@ -89,6 +91,12 @@ extension AddViewController {
                 print("Image Prompt: \(mix.generatedImagePrompt)")
                 print("Suggested Name: \(mix.suggestedName)")
                 print("Improvement Tip: \(mix.improvementTip)")
+                DispatchQueue.main.async {
+                    let mixVC = UIStoryboard(name: "AddStoryboard", bundle: nil).instantiateViewController(withIdentifier: "AddMixDataDetailsVC") as! AddMixDataDetailsVC
+
+                    mixVC.mix = mix
+                    self.navigationController?.pushViewController(mixVC, animated: true)
+                }
             case .failure(let error):
                 print("Error: \(error)")
             }

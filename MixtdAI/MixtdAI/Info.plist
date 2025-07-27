@@ -31,6 +31,8 @@
 		<string>fetch</string>
 		<string>remote-notification</string>
 	</array>
+	<key>UIUserInterfaceStyle</key>
+	<string>Light</string>
 	<key>LSMinimumSystemVersion</key>
 	<string>13.0</string>
 </dict>
