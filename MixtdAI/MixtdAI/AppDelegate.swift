@@ -24,8 +24,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Enable the new toolbar manager
         IQKeyboardToolbarManager.shared.isEnabled = true
         IQKeyboardToolbarManager.shared.toolbarConfiguration.previousNextDisplayMode = .alwaysShow
-
-        sleep(2)
         return true
     }
 

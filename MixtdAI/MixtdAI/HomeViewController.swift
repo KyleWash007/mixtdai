@@ -10,10 +10,19 @@ import IQKeyboardManagerSwift
 
 class HomeViewController: UIViewController {
     
+    let logoImageView: UIImageView = {
+        let imageView = UIImageView(image: UIImage(named: "mixtdlogo")) // Replace with your image name
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.contentMode = .scaleAspectFit
+        return imageView
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let splash = SplashAnimationView(frame: self.view.bounds)
+        self.view.addSubview(splash)
+
         // Do any additional setup after loading the view.
     }
     

@@ -59,6 +59,12 @@ class AddViewController: UIViewController {
     @IBAction func backAction(_ sender: Any) {
         self.navigationController?.popViewController(animated: true)
     }
+    
+    @IBAction func nextAction(_ sender: Any) {
+        let loader = LoaderAnimationView(frame: view.bounds)
+        view.addSubview(loader)
+        loader.startAnimation()
+    }
 }
 
 extension AddViewController : MetaSelectionDelegate {

@@ -101,5 +101,11 @@ class HUDManager {
         UIGraphicsEndImageContext()
         return blendedImage
     }
-
+    class func getRandomPlaceholderImage() -> UIImage {
+        if let random = UIImage(named: "\(arc4random_uniform(100))") {
+            return random
+        } else {
+            return #imageLiteral(resourceName: "72")
+        }
+    }
 }
