@@ -35,7 +35,7 @@ class LoaderAnimationView: UIView {
         let label = UILabel()
         label.text = "Something is being created for you...\nPlease wait."
         label.textColor = .white
-        label.font = UIFont.systemFont(ofSize: 16, weight: .medium)
+        label.font = UIFont.systemFont(ofSize: 20, weight: .bold)
         label.numberOfLines = 2
         label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -77,15 +77,17 @@ class LoaderAnimationView: UIView {
         
         NSLayoutConstraint.activate([
             logoImageView.centerXAnchor.constraint(equalTo: centerXAnchor),
-            logoImageView.centerYAnchor.constraint(equalTo: centerYAnchor,constant: -120),
+            logoImageView.centerYAnchor.constraint(equalTo: centerYAnchor,constant: -140),
             logoImageView.widthAnchor.constraint(equalToConstant: 180),
             logoImageView.heightAnchor.constraint(equalToConstant: 180),
             
-            messageLabel.topAnchor.constraint(equalTo: logoImageView.bottomAnchor, constant: 24),
+            messageLabel.topAnchor.constraint(equalTo: logoImageView.bottomAnchor, constant: 12),
             messageLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
             messageLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 40),
             messageLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -40)
         ])
+        self.showAnimationLayerView()
+
     }
 
     // MARK: - Bounce Fade-In/Out Loop

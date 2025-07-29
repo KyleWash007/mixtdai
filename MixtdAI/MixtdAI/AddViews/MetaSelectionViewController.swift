@@ -60,7 +60,6 @@ class MetaSelectionViewController: UIViewController {
         actionSheetController.addAction(firstAction)
         actionSheetController.addAction(secondAction)
         actionSheetController.addAction(cancelAction)
-       
 
         self.present(actionSheetController, animated: true)
     }

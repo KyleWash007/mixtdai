@@ -75,6 +75,50 @@ extension UIViewController {
         }
     }
 }
+extension UIView  {
+    
+    func showAnimationLayerView(color:UIColor = .red) {
+        // Customize your comet
+        let width = self.bounds.width
+        let height = self.bounds.height
+        let colorSet = color
+        
+        let comets = [Comet(startPoint: CGPoint(x: 150, y: 0),
+                            endPoint: CGPoint(x: 0, y: 150),
+                            lineColor: colorSet.withAlphaComponent(0.2),
+                            cometColor: colorSet),
+                      Comet(startPoint: CGPoint(x: 0.4 * width, y: 0),
+                            endPoint: CGPoint(x: width, y: 0.8 * width),
+                            lineColor: colorSet.withAlphaComponent(0.2),
+                            cometColor: colorSet),
+                      Comet(startPoint: CGPoint(x: 0.8 * width, y: 0),
+                            endPoint: CGPoint(x: width, y: 0.2 * width),
+                            lineColor: colorSet.withAlphaComponent(0.2),
+                            cometColor: colorSet),
+                      Comet(startPoint: CGPoint(x: width, y: 0.2 * height),
+                            endPoint: CGPoint(x: 0, y: 0.25 * height),
+                            lineColor: colorSet.withAlphaComponent(0.2),
+                            cometColor: colorSet),
+                      Comet(startPoint: CGPoint(x: 0, y: height - 0.8 * width),
+                            endPoint: CGPoint(x: 0.6 * width, y: height),
+                            lineColor: colorSet.withAlphaComponent(0.2),
+                            cometColor: colorSet),
+                      Comet(startPoint: CGPoint(x: width - 150, y: height),
+                            endPoint: CGPoint(x: width, y: height - 150),
+                            lineColor: colorSet.withAlphaComponent(0.2),
+                            cometColor: colorSet),
+                      Comet(startPoint: CGPoint(x: 0, y: 0.8 * height),
+                            endPoint: CGPoint(x: width, y: 0.75 * height),
+                            lineColor: colorSet.withAlphaComponent(0.2),
+                            cometColor: colorSet)]
+        
+        // draw track and animate
+        for comet in comets {
+            self.layer.addSublayer(comet.drawLine())
+            self.layer.addSublayer(comet.animate())
+        }
+    }
+}
 extension UIView {
     func takeScreenshot() -> UIImage {
         UIGraphicsBeginImageContextWithOptions(self.bounds.size, false, UIScreen.main.scale)

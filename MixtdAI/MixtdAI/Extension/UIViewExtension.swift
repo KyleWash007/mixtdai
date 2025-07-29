@@ -201,3 +201,19 @@ extension UIView {
  
     //shadowRadius
 }
+extension UIButton {
+    func applyGradient(colors: [UIColor], startPoint: CGPoint = CGPoint(x: 0, y: 0), endPoint: CGPoint = CGPoint(x: 1, y: 1)) {
+        let gradientLayer = CAGradientLayer()
+        gradientLayer.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: self.frame.size.height)
+        gradientLayer.cornerRadius = self.layer.cornerRadius
+        gradientLayer.colors = colors.map { $0.cgColor }
+        gradientLayer.startPoint = startPoint
+        gradientLayer.endPoint = endPoint
+        gradientLayer.zPosition = -1
+        
+        // Remove old gradient layers
+        self.layer.sublayers?.removeAll(where: { $0 is CAGradientLayer })
+
+        self.layer.insertSublayer(gradientLayer, at: 0)
+    }
+}

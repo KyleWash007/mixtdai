@@ -28,6 +28,7 @@ class HomeViewController: UIViewController {
     
     @IBAction func callAddData(_ sender: Any) {
         let vc = UIStoryboard(name: "AddStoryboard", bundle: nil).instantiateViewController(withIdentifier: "AddViewController") as! AddViewController
+        
         self.navigationController?.pushViewController(vc, animated: true)
     }
 

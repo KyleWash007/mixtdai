@@ -25,6 +25,7 @@ class InstagramGradientView: UIView {
         super.init(frame: frame)
         setupGradient()
         startAnimatingGradient()
+        self.showAnimationLayerView(color: .white.withAlphaComponent(0.8))
     }
 
     required init?(coder: NSCoder) {

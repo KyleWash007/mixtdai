@@ -52,7 +52,7 @@
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
-                        <color key="backgroundColor" name="White"/>
+                        <color key="backgroundColor" name="Black"/>
                         <constraints>
                             <constraint firstItem="3GG-bi-7KH" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="qAL-dJ-fYc"/>
                             <constraint firstItem="3GG-bi-7KH" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="v4U-ub-85f"/>
@@ -66,8 +66,8 @@
         </scene>
     </scenes>
     <resources>
-        <namedColor name="White">
-            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        <namedColor name="Black">
+            <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>

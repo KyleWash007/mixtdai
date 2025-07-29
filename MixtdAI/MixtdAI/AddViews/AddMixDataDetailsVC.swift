@@ -60,6 +60,7 @@ class AddMixDataDetailsVC: UIViewController {
 
             let imageView = UIImageView()
             imageView.translatesAutoresizingMaskIntoConstraints = false
+            imageView.backgroundColor = .lightGray
             imageView.contentMode = .scaleAspectFill
             imageView.clipsToBounds = true
             imageView.layer.cornerRadius = 75
@@ -105,11 +106,11 @@ class AddMixDataDetailsVC: UIViewController {
 
         // 2. Add text content
         let items: [(String, String)] = [
+            ("Suggested Name", mix.suggestedName),
             ("What You Will Experience", mix.experience),
             ("What's the Science 🧬", mix.science),
             ("What Is This Mix Similar To?", mix.similarTo),
-            ("AI Image Prompt", mix.generatedImagePrompt),
-            ("Suggested Name", mix.suggestedName),
+//            ("AI Image Prompt", mix.generatedImagePrompt),
             ("One Suggestion to Improve Your Mix", mix.improvementTip)
         ]
 
@@ -118,11 +119,13 @@ class AddMixDataDetailsVC: UIViewController {
             titleLabel.text = title
             titleLabel.font = UIFont.boldSystemFont(ofSize: 18)
             titleLabel.numberOfLines = 0
+            titleLabel.textColor = .white
 
             let bodyLabel = UILabel()
             bodyLabel.text = value
             bodyLabel.font = UIFont.systemFont(ofSize: 16)
             bodyLabel.numberOfLines = 0
+            bodyLabel.textColor = .white
 
             contentStackView.addArrangedSubview(titleLabel)
             contentStackView.addArrangedSubview(bodyLabel)
