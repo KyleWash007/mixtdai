@@ -81,7 +81,7 @@ extension AddViewController {
         let ingredient2 = "\(metadata2?.title ?? "") \(metadata2?.description ?? "")"
         HUDManager.showHUD()
         self.chatService.generateMixAIResponse(ingredient1: ingredient1, ingredient2: ingredient2) { result in
-            
+
             switch result {
             case .success(let mix):
                 print("Experience: \(mix.experience)")
@@ -90,21 +90,34 @@ extension AddViewController {
                 print("Image Prompt: \(mix.generatedImagePrompt)")
                 print("Suggested Name: \(mix.suggestedName)")
                 print("Improvement Tip: \(mix.improvementTip)")
-                self.chatService.generateImageURL(from: "genrate colorfull image of \(mix.suggestedName) of \(self.metadata1?.title ?? "") and \(self.metadata2?.title ?? "")") { imageResult in
-                    HUDManager.hideHUD()
+              //  self.createAiImage(mix: mix)
 
-                             switch imageResult {
-                             case .success(let imageURL):
-                                 DispatchQueue.main.async {
-                                     self.showDetails(mix: mix, image: imageURL)
-                                 }
-                             case .failure(let error):
-                                 print("Image generation failed: \(error)")
-                                 DispatchQueue.main.async {
-                                     self.showDetails(mix: mix, image: nil) // fallback
-                                 }
-                             }
-                         }
+                DispatchQueue.main.async {
+                    
+                    let alert = UIAlertController(title: "Choose Option",
+                                                  message: "Do you want to generate a new image using AI, or just combine the two images directly?",
+                                                  preferredStyle: .alert)
+                    
+                    let aiGenerateAction = UIAlertAction(title: "AI Generate", style: .default) { _ in
+                        // Handle AI image generation here
+                        print("AI Generate option selected")
+                        // Example: callAPIToGenerateAIImage(from: image1, and: image2)
+                        self.createAiImage(mix: mix)
+                    }
+                    
+                    let combineImagesAction = UIAlertAction(title: "Combine Images", style: .default) { _ in
+                        // Handle local image merge here
+                        let combined = HUDManager.mergeImagesWithSmoothBlend(image1: self.metadata1!.image!, image2: self.metadata2!.image!)
+                        
+                        self.showDetails(mix: mix,imageul: nil,image: combined)
+                    }
+                    
+                    
+                    alert.addAction(aiGenerateAction)
+                    alert.addAction(combineImagesAction)
+                    
+                    self.present(alert, animated: true, completion: nil)
+                }
 
             case .failure(let error):
                 HUDManager.hideHUD()
@@ -113,12 +126,38 @@ extension AddViewController {
             }
         }
     }
-    func showDetails(mix:MixAIResponse,image:URL?) {
+    func createAiImage(mix:MixAIResponse) {
+        HUDManager.showHUD()
+        self.chatService.generateImageURL(from: "genrate colorfull image of \(mix.suggestedName) of \(self.metadata1?.title ?? "") and \(self.metadata2?.title ?? "")") { imageResult in
+                   HUDManager.hideHUD()
+                     switch imageResult {
+                     case .success(let imageURL):
+                         DispatchQueue.main.async {
+                             self.showDetails(mix: mix, imageul: imageURL, image: nil)
+                         }
+                     case .failure(let error):
+                         print("Image generation failed: \(error)")
+                         DispatchQueue.main.async {
+                             let combined = HUDManager.mergeImagesWithSmoothBlend(image1: self.metadata1!.image!, image2: self.metadata2!.image!)
+                             self.showDetails(mix: mix,imageul: nil,image: combined)
+                         }
+                     }
+                 }
+    }
+    func showDetails(mix:MixAIResponse,imageul:URL?,image:UIImage?) {
+        
         DispatchQueue.main.async {
+            HUDManager.hideHUD()
+
             let mixVC = UIStoryboard(name: "AddStoryboard", bundle: nil).instantiateViewController(withIdentifier: "AddMixDataDetailsVC") as! AddMixDataDetailsVC
             mixVC.mix = mix
-            mixVC.image = image
-            print(image?.absoluteString)
+            mixVC.image = imageul
+            if let image {
+                mixVC.imageViewShow = image
+                mixVC.imageData = image.pngData()
+
+            }
+            print(imageul?.absoluteString)
             self.navigationController?.pushViewController(mixVC, animated: true)
         }
     }
