@@ -5,15 +5,9 @@
 //  Created by Aravind Kumar on 29/07/25.
 //
 
-
-//
-//  LoaderAnimationView.swift
-//  MixtdAI
-//
-//  Created by Aravind Kumar on 29/07/25.
-//
-
 import UIKit
+
+// MARK: - Gradient Extension
 extension UIView {
     func applyGradientBackground(colors: [UIColor], startPoint: CGPoint = CGPoint(x: 0, y: 0), endPoint: CGPoint = CGPoint(x: 1, y: 1)) {
         let gradientLayer = CAGradientLayer()
@@ -27,6 +21,7 @@ extension UIView {
     }
 }
 
+// MARK: - LoaderAnimationView
 class LoaderAnimationView: UIView {
     
     private let logoImageView: UIImageView = {
@@ -34,6 +29,17 @@ class LoaderAnimationView: UIView {
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.contentMode = .scaleAspectFit
         return imageView
+    }()
+    
+    private let messageLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Something is being created for you...\nPlease wait."
+        label.textColor = .white
+        label.font = UIFont.systemFont(ofSize: 16, weight: .medium)
+        label.numberOfLines = 2
+        label.textAlignment = .center
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
     }()
     
     private var shouldAnimate = false
@@ -65,23 +71,29 @@ class LoaderAnimationView: UIView {
         backgroundColor = .black
         let animatedGradient = InstagramGradientView(frame: self.bounds)
         self.insertSubview(animatedGradient, at: 0)
+        
         addSubview(logoImageView)
+        addSubview(messageLabel)
+        
         NSLayoutConstraint.activate([
             logoImageView.centerXAnchor.constraint(equalTo: centerXAnchor),
-            logoImageView.centerYAnchor.constraint(equalTo: centerYAnchor),
+            logoImageView.centerYAnchor.constraint(equalTo: centerYAnchor,constant: -120),
             logoImageView.widthAnchor.constraint(equalToConstant: 180),
-            logoImageView.heightAnchor.constraint(equalToConstant: 180)
+            logoImageView.heightAnchor.constraint(equalToConstant: 180),
+            
+            messageLabel.topAnchor.constraint(equalTo: logoImageView.bottomAnchor, constant: 24),
+            messageLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
+            messageLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 40),
+            messageLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -40)
         ])
     }
 
-    // MARK: - Bounce Loop
     // MARK: - Bounce Fade-In/Out Loop
     private func animateBounce() {
         guard shouldAnimate else { return }
 
-        // Reset to small & invisible before each cycle
-        self.logoImageView.transform = CGAffineTransform(scaleX: 0.2, y: 0.2)
-        self.logoImageView.alpha = 0.0
+        logoImageView.transform = CGAffineTransform(scaleX: 0.2, y: 0.2)
+        logoImageView.alpha = 0.0
 
         UIView.animate(withDuration: 1.5,
                        delay: 0.0,
@@ -97,9 +109,8 @@ class LoaderAnimationView: UIView {
                 self.logoImageView.transform = CGAffineTransform(scaleX: 0.2, y: 0.2)
                 self.logoImageView.alpha = 0.0
             }) { _ in
-                self.animateBounce() // Repeat loop
+                self.animateBounce()
             }
         }
     }
-
 }
