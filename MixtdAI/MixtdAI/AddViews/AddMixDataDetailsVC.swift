@@ -68,8 +68,8 @@ class AddMixDataDetailsVC: UIViewController {
 
             imageContainer.addSubview(imageView)
             NSLayoutConstraint.activate([
-                imageView.widthAnchor.constraint(equalToConstant: 150),
-                imageView.heightAnchor.constraint(equalToConstant: 150),
+                imageView.widthAnchor.constraint(equalToConstant: 160),
+                imageView.heightAnchor.constraint(equalToConstant: 160),
                 imageView.centerXAnchor.constraint(equalTo: imageContainer.centerXAnchor),
                 imageView.topAnchor.constraint(equalTo: imageContainer.topAnchor),
                 imageView.bottomAnchor.constraint(equalTo: imageContainer.bottomAnchor)
