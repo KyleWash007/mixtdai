@@ -427,6 +427,19 @@
                                         <color key="textColor" name="White"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b7P-w0-UGH">
+                                        <rect key="frame" x="329" y="0.0" width="64" height="64"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="64" id="Kjh-c9-Kgh"/>
+                                            <constraint firstAttribute="width" constant="64" id="SyW-jY-qIO"/>
+                                        </constraints>
+                                        <color key="tintColor" name="White"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" image="square.and.arrow.up" catalog="system"/>
+                                        <connections>
+                                            <action selector="shareAction:" destination="BIp-a7-W1n" eventType="touchUpInside" id="PcE-BF-00J"/>
+                                        </connections>
+                                    </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lXU-Nn-3QA">
                                         <rect key="frame" x="0.0" y="0.0" width="64" height="64"/>
                                         <constraints>
@@ -445,8 +458,10 @@
                                 <constraints>
                                     <constraint firstItem="0fx-zH-lSJ" firstAttribute="centerX" secondItem="4Of-Ya-AWP" secondAttribute="centerX" id="69M-GG-zYH"/>
                                     <constraint firstAttribute="height" constant="64" id="VT4-77-H4Y"/>
+                                    <constraint firstItem="b7P-w0-UGH" firstAttribute="top" secondItem="4Of-Ya-AWP" secondAttribute="top" id="WA1-LR-aWZ"/>
                                     <constraint firstItem="lXU-Nn-3QA" firstAttribute="leading" secondItem="4Of-Ya-AWP" secondAttribute="leading" id="YTO-dz-JuZ"/>
                                     <constraint firstItem="0fx-zH-lSJ" firstAttribute="centerY" secondItem="4Of-Ya-AWP" secondAttribute="centerY" id="c5C-48-GP6"/>
+                                    <constraint firstAttribute="trailing" secondItem="b7P-w0-UGH" secondAttribute="trailing" id="ktz-7U-gp7"/>
                                     <constraint firstItem="lXU-Nn-3QA" firstAttribute="top" secondItem="4Of-Ya-AWP" secondAttribute="top" id="xiU-la-Bdp"/>
                                 </constraints>
                             </view>
@@ -480,6 +495,7 @@
         <image name="chevron.backward" catalog="system" width="97" height="128"/>
         <image name="logoT" width="800" height="800"/>
         <image name="photo.badge.plus" catalog="system" width="128" height="97"/>
+        <image name="square.and.arrow.up" catalog="system" width="110" height="128"/>
         <namedColor name="Black">
             <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

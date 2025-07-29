@@ -31,7 +31,7 @@ class SplashAnimationView: UIView {
 
         // Apply styles
         attributedText.addAttribute(.font, value: UIFont.systemFont(ofSize: 17, weight: .medium), range: line1Range)
-        attributedText.addAttribute(.font, value: UIFont.boldSystemFont(ofSize: 32), range: line2Range)
+        attributedText.addAttribute(.font, value: UIFont.boldSystemFont(ofSize: 30), range: line2Range)
         attributedText.addAttribute(.foregroundColor, value: UIColor.white, range: NSRange(location: 0, length: fullText.count))
 
         label.attributedText = attributedText

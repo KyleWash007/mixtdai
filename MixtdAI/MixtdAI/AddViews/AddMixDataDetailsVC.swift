@@ -1,33 +1,34 @@
-//
-//  AddMixDataDetailsVC.swift
-//  MixtdAI
-//
-//  Created by Aravind Kumar on 27/07/25.
-//
-
 import UIKit
 import SKPhotoBrowser
 
 class AddMixDataDetailsVC: UIViewController {
     @IBOutlet weak var contentView: UIView!
     var mix: MixAIResponse!
-    var image:URL?
-    var imageData:Data?
-    var imageViewShow:UIImage?
+    var image: URL?
+    var imageData: Data?
+    var imageViewShow: UIImage?
+
     private let scrollView = UIScrollView()
     private let contentStackView = UIStackView()
+    private var suggestedNameLabel: UILabel?
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setupScrollView()
         setupContent()
-        // Do any additional setup after loading the view.
     }
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
     }
+
     @IBAction func backAction(_ sender: Any) {
         self.navigationController?.popViewController(animated: true)
     }
+    @IBAction func shareAction(_ sender: Any) {
+        self.shareAsPDF()
+    }
+
     private func setupScrollView() {
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview(scrollView)
@@ -54,31 +55,28 @@ class AddMixDataDetailsVC: UIViewController {
     }
 
     private func setupContent() {
-        // 1. If there's an image URL, show the image
-            let imageContainer = UIView()
-            imageContainer.translatesAutoresizingMaskIntoConstraints = false
+        let imageContainer = UIView()
+        imageContainer.translatesAutoresizingMaskIntoConstraints = false
 
-            let imageView = UIImageView()
-            imageView.translatesAutoresizingMaskIntoConstraints = false
-            imageView.backgroundColor = .lightGray
-            imageView.contentMode = .scaleAspectFill
-            imageView.clipsToBounds = true
-            imageView.layer.cornerRadius = 75
-            imageView.layer.masksToBounds = true
+        let imageView = UIImageView()
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.backgroundColor = .lightGray
+        imageView.contentMode = .scaleAspectFill
+        imageView.clipsToBounds = true
+        imageView.layer.cornerRadius = 80
+        imageView.layer.masksToBounds = true
 
-            imageContainer.addSubview(imageView)
-            NSLayoutConstraint.activate([
-                imageView.widthAnchor.constraint(equalToConstant: 160),
-                imageView.heightAnchor.constraint(equalToConstant: 160),
-                imageView.centerXAnchor.constraint(equalTo: imageContainer.centerXAnchor),
-                imageView.topAnchor.constraint(equalTo: imageContainer.topAnchor),
-                imageView.bottomAnchor.constraint(equalTo: imageContainer.bottomAnchor)
-            ])
+        imageContainer.addSubview(imageView)
+        NSLayoutConstraint.activate([
+            imageView.widthAnchor.constraint(equalToConstant: 160),
+            imageView.heightAnchor.constraint(equalToConstant: 160),
+            imageView.centerXAnchor.constraint(equalTo: imageContainer.centerXAnchor),
+            imageView.topAnchor.constraint(equalTo: imageContainer.topAnchor),
+            imageView.bottomAnchor.constraint(equalTo: imageContainer.bottomAnchor)
+        ])
+        contentStackView.addArrangedSubview(imageContainer)
 
-            contentStackView.addArrangedSubview(imageContainer)
-
-            // Load image async
-            if let imageURL = image {
+        if let imageURL = image {
             URLSession.shared.dataTask(with: imageURL) { data, _, error in
                 guard let data = data, let uiImage = UIImage(data: data), error == nil else { return }
                 DispatchQueue.main.async {
@@ -88,29 +86,46 @@ class AddMixDataDetailsVC: UIViewController {
                     self.addTabGesture(uiimage: imageView)
                 }
             }.resume()
-            }else {
-                DispatchQueue.main.async {
-                    imageView.image = self.imageViewShow
-                    self.addTabGesture(uiimage: imageView)
-                    imageView.contentMode = .scaleAspectFill
-                    imageView.layoutIfNeeded()
-
-                    // Delay cornerRadius logic by 1 second
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-                        imageView.layer.cornerRadius = 75
-                        imageView.layer.masksToBounds = true
-                        imageView.clipsToBounds = true
-                    }
-                }
+        } else {
+            DispatchQueue.main.async {
+                imageView.image = self.imageViewShow
+                self.addTabGesture(uiimage: imageView)
             }
+        }
 
-        // 2. Add text content
+        // Title + edit icon for Suggested Name
+        let titleRow = UIStackView()
+        titleRow.axis = .horizontal
+        titleRow.alignment = .center
+        titleRow.spacing = 8
+
+        let titleLabel = UILabel()
+        titleLabel.text = "Suggested Name"
+        titleLabel.font = UIFont.boldSystemFont(ofSize: 18)
+        titleLabel.textColor = .white
+
+        let editButton = UIButton(type: .system)
+        editButton.setImage(UIImage(systemName: "pencil"), for: .normal)
+        editButton.tintColor = .white
+        editButton.addTarget(self, action: #selector(editSuggestedName), for: .touchUpInside)
+
+        titleRow.addArrangedSubview(titleLabel)
+        titleRow.addArrangedSubview(editButton)
+        contentStackView.addArrangedSubview(titleRow)
+
+        let nameLabel = UILabel()
+        nameLabel.text = mix.suggestedName
+        nameLabel.font = UIFont.systemFont(ofSize: 16)
+        nameLabel.textColor = .white
+        nameLabel.numberOfLines = 0
+        suggestedNameLabel = nameLabel
+
+        contentStackView.addArrangedSubview(nameLabel)
+
         let items: [(String, String)] = [
-            ("Suggested Name", mix.suggestedName),
             ("What You Will Experience", mix.experience),
             ("What's the Science 🧬", mix.science),
             ("What Is This Mix Similar To?", mix.similarTo),
-//            ("AI Image Prompt", mix.generatedImagePrompt),
             ("One Suggestion to Improve Your Mix", mix.improvementTip)
         ]
 
@@ -131,22 +146,80 @@ class AddMixDataDetailsVC: UIViewController {
             contentStackView.addArrangedSubview(bodyLabel)
         }
     }
+
+    @objc func editSuggestedName() {
+        let alert = UIAlertController(title: "Edit Suggested Name", message: "Enter a new name for your mix", preferredStyle: .alert)
+        alert.addTextField { textField in
+            textField.text = self.suggestedNameLabel?.text
+        }
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        alert.addAction(UIAlertAction(title: "Save", style: .default, handler: { _ in
+            if let newName = alert.textFields?.first?.text, !newName.isEmpty {
+                self.suggestedNameLabel?.text = newName
+            }
+        }))
+        present(alert, animated: true, completion: nil)
+    }
+
     func addTabGesture(uiimage: UIImageView) {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(showImage))
         uiimage.addGestureRecognizer(tapGesture)
         uiimage.isUserInteractionEnabled = true
     }
-    // 1. create SKPhoto Array from UIImage
+
     @objc func showImage() {
         if let ss = self.imageViewShow {
-            var images = [SKPhoto]()
-            let photo = SKPhoto.photoWithImage(ss)// add some UIImage
-            images.append(photo)
-            
-            // 2. create PhotoBrowser Instance, and present from your viewController.
-            let browser = SKPhotoBrowser(photos: images)
+            let photo = SKPhoto.photoWithImage(ss)
+            let browser = SKPhotoBrowser(photos: [photo])
             browser.initializePageIndex(0)
             present(browser, animated: true, completion: {})
         }
     }
+}
+extension AddMixDataDetailsVC {
+    func shareAsPDF() {
+        let pdfData = createPDFData(from: scrollView)
+        
+        let tempURL = FileManager.default.temporaryDirectory.appendingPathComponent("MixDetails.pdf")
+        do {
+            try pdfData.write(to: tempURL)
+            let activityVC = UIActivityViewController(activityItems: [tempURL], applicationActivities: nil)
+            activityVC.popoverPresentationController?.sourceView = self.view
+            present(activityVC, animated: true, completion: nil)
+        } catch {
+            print("❌ Failed to write PDF data: \(error)")
+        }
+    }
+    
+    private func createPDFData(from scrollView: UIScrollView) -> Data {
+        let originalOffset = scrollView.contentOffset
+        let originalFrame = scrollView.frame
+
+        // Prepare full content size for rendering
+        let pdfPageBounds = CGRect(origin: .zero, size: scrollView.contentSize)
+        let format = UIGraphicsPDFRendererFormat()
+        let renderer = UIGraphicsPDFRenderer(bounds: pdfPageBounds, format: format)
+
+        let data = renderer.pdfData { ctx in
+            ctx.beginPage()
+
+            // Set background to black
+            ctx.cgContext.setFillColor(UIColor.black.cgColor)
+            ctx.cgContext.fill(pdfPageBounds)
+
+            // Prepare scrollView layout
+            scrollView.contentOffset = .zero
+            scrollView.frame = CGRect(origin: .zero, size: scrollView.contentSize)
+
+            // Render view's layer onto the black background
+            scrollView.layer.render(in: ctx.cgContext)
+        }
+
+        // Restore original frame and offset
+        scrollView.contentOffset = originalOffset
+        scrollView.frame = originalFrame
+
+        return data
+    }
+
 }

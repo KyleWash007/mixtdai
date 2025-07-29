@@ -33,7 +33,7 @@ class LoaderAnimationView: UIView {
     
     private let messageLabel: UILabel = {
         let label = UILabel()
-        label.text = "Something is being created for you...\nPlease wait."
+        label.text = "Your mix is being imagined and analyzed"
         label.textColor = .white
         label.font = UIFont.systemFont(ofSize: 20, weight: .bold)
         label.numberOfLines = 2

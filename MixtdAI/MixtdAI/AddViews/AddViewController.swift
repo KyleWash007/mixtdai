@@ -118,7 +118,9 @@ extension AddViewController {
                 print("Image Prompt: \(mix.generatedImagePrompt)")
                 print("Suggested Name: \(mix.suggestedName)")
                 print("Improvement Tip: \(mix.improvementTip)")
-                self.createAiImage(mix: mix)
+                DispatchQueue.main.async {
+                    self.createAiImage(mix: mix)
+                }
 
 //                DispatchQueue.main.async {
 //                    
@@ -156,7 +158,6 @@ extension AddViewController {
     }
     func createAiImage(mix:MixAIResponse) {
         self.chatService.generateImageURL(from: "Create a combined circular colorfull logo of \(self.firstTextFiled.text ?? "") and \(self.secondTextFiled.text ?? "")") { imageResult in
-                   HUDManager.hideHUD()
                      switch imageResult {
                      case .success(let imageURL):
                          DispatchQueue.main.async {
