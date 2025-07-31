@@ -17,7 +17,7 @@ class InstagramGradientView: UIView {
         [UIColor.purple.cgColor, UIColor.systemPink.cgColor],
         [UIColor.cyan.cgColor, UIColor.blue.cgColor],
         [UIColor.red.cgColor, UIColor.purple.cgColor]
-    ]
+    ].shuffled()
     
     private var currentIndex = 0
 

@@ -58,7 +58,7 @@ class ChatGPTService {
         1. experience — A short, valid description of what someone will experience when tasting the mix.
         2. science — A simplified explanation of the flavor chemistry or interaction between the ingredients.
         3. similarTo — Mention what this mix is similar to (another cocktail or experience).
-        4. generatedImagePrompt — A vivid prompt to generate an AI image based on the mix (describe how it looks).
+        4. Recommended Ratio — Recommend what is the optimal mixture ratio for the best flavor of this mixture..
         5. suggestedName — Suggest a creative, unique name for the mix.
         6. improvementTip — Suggest one smart improvement to enhance the mix further.
 
@@ -69,7 +69,7 @@ class ChatGPTService {
           "experience": "...",
           "science": "...",
           "similarTo": "...",
-          "generatedImagePrompt": "...",
+          "recommendedRatio": "...",
           "suggestedName": "...",
           "improvementTip": "..."
         }
@@ -204,7 +204,7 @@ struct MixAIResponse: Codable {
     let experience: String
     let science: String
     let similarTo: String
-    let generatedImagePrompt: String
+    let recommendedRatio: String
     let suggestedName: String
     let improvementTip: String
 }

@@ -115,7 +115,7 @@ extension AddViewController {
                 print("Experience: \(mix.experience)")
                 print("Science: \(mix.science)")
                 print("Similar To: \(mix.similarTo)")
-                print("Image Prompt: \(mix.generatedImagePrompt)")
+                print("recommendedRatio : \(mix.recommendedRatio)")
                 print("Suggested Name: \(mix.suggestedName)")
                 print("Improvement Tip: \(mix.improvementTip)")
                 DispatchQueue.main.async {

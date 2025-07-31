@@ -123,10 +123,11 @@ class AddMixDataDetailsVC: UIViewController {
         contentStackView.addArrangedSubview(nameLabel)
 
         let items: [(String, String)] = [
-            ("What You Will Experience", mix.experience),
-            ("What's the Science 🧬", mix.science),
-            ("What Is This Mix Similar To?", mix.similarTo),
-            ("One Suggestion to Improve Your Mix", mix.improvementTip)
+            ("✨ What You Will Experience", mix.experience),
+            ("🧪 Recommended Ratio", mix.recommendedRatio),
+            ("🧬 What's the Science", mix.science),
+            ("🎯 What Is This Mix Similar To?", mix.similarTo),
+            ("💡 One Suggestion to Improve Your Mix", mix.improvementTip)
         ]
 
         for (title, value) in items {
@@ -178,48 +179,13 @@ class AddMixDataDetailsVC: UIViewController {
 }
 extension AddMixDataDetailsVC {
     func shareAsPDF() {
-        let pdfData = createPDFData(from: scrollView)
-        
-        let tempURL = FileManager.default.temporaryDirectory.appendingPathComponent("MixDetails.pdf")
-        do {
-            try pdfData.write(to: tempURL)
-            let activityVC = UIActivityViewController(activityItems: [tempURL], applicationActivities: nil)
-            activityVC.popoverPresentationController?.sourceView = self.view
-            present(activityVC, animated: true, completion: nil)
-        } catch {
-            print("❌ Failed to write PDF data: \(error)")
+        if let pdfURL = self.scrollView.exportContentAsPDFSS() {
+            let avc = UIActivityViewController(
+                activityItems: [pdfURL],
+                applicationActivities: nil)
+            avc.popoverPresentationController?.sourceView = view
+            present(avc, animated: true)
         }
     }
     
-    private func createPDFData(from scrollView: UIScrollView) -> Data {
-        let originalOffset = scrollView.contentOffset
-        let originalFrame = scrollView.frame
-
-        // Prepare full content size for rendering
-        let pdfPageBounds = CGRect(origin: .zero, size: scrollView.contentSize)
-        let format = UIGraphicsPDFRendererFormat()
-        let renderer = UIGraphicsPDFRenderer(bounds: pdfPageBounds, format: format)
-
-        let data = renderer.pdfData { ctx in
-            ctx.beginPage()
-
-            // Set background to black
-            ctx.cgContext.setFillColor(UIColor.black.cgColor)
-            ctx.cgContext.fill(pdfPageBounds)
-
-            // Prepare scrollView layout
-            scrollView.contentOffset = .zero
-            scrollView.frame = CGRect(origin: .zero, size: scrollView.contentSize)
-
-            // Render view's layer onto the black background
-            scrollView.layer.render(in: ctx.cgContext)
-        }
-
-        // Restore original frame and offset
-        scrollView.contentOffset = originalOffset
-        scrollView.frame = originalFrame
-
-        return data
-    }
-
 }
