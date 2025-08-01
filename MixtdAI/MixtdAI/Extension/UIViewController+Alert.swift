@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 extension UIViewController {
-    func showAlert(message: String, title: String = "") {
+    func showAlert(message: String, title: String = "MixtdAI") {
         let alert = UIAlertController(
             title: title,
             message: message,

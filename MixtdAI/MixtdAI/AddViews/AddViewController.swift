@@ -11,19 +11,11 @@ class AddViewController: UIViewController {
     @IBOutlet weak var firstTextFiled: UITextField!
     @IBOutlet weak var secondTextFiled: UITextField!
 
-    var metadata1: MetaData?
-    var metadata2: MetaData?
     var tappedmeta: Int = 1
     var loaderAnimationView:LoaderAnimationView?
     private let chatService = ChatGPTService()
     
-    @IBOutlet weak var image1: UIImageView!
-    
-    @IBOutlet weak var image2: UIImageView!
-    
-    @IBOutlet weak var image3: UIImageView!
-    
-    @IBOutlet weak var btnNext: UIButton!
+        @IBOutlet weak var btnNext: UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -33,36 +25,7 @@ class AddViewController: UIViewController {
           ])
     }
     
-    @IBAction func stepAction1(_ sender: Any) {
-        let vc = UIStoryboard(name: "AddStoryboard", bundle: nil).instantiateViewController(withIdentifier: "MetaSelectionViewController") as! MetaSelectionViewController
-        self.tappedmeta = 1
-        vc.delegate = self
-        self.navigationController?.pushViewController(vc, animated: true)
-    }
     
-    @IBAction func stepAction2(_ sender: Any) {
-        
-        if self.metadata1 == nil {
-            self.showAlert(message: "Please upload first mixture data")
-            return
-        }
-        let vc = UIStoryboard(name: "AddStoryboard", bundle: nil).instantiateViewController(withIdentifier: "MetaSelectionViewController") as! MetaSelectionViewController
-        self.tappedmeta = 2
-        vc.delegate = self
-        self.navigationController?.pushViewController(vc, animated: true)
-    }
-    @IBAction func stepAction3(_ sender: Any) {
-        if self.metadata1 == nil {
-            self.showAlert(message: "Please upload first mixture data")
-            return
-        }
-        if self.metadata2 == nil {
-            self.showAlert(message: "Please upload second mixture data")
-            return
-        }
-        self.getMixAIResponse()
-        
-    }
     @IBAction func backAction(_ sender: Any) {
         self.navigationController?.popViewController(animated: true)
     }
@@ -86,19 +49,6 @@ class AddViewController: UIViewController {
     }
 }
 
-extension AddViewController : MetaSelectionDelegate {
-    func metaDataSelected(metaData: MetaData) {
-        if tappedmeta == 1 {
-            self.metadata1 = metaData
-            self.image1.image = metaData.image
-        }
-        else if tappedmeta == 2 {
-            self.metadata2 = metaData
-            self.image2.image = metaData.image
-        }
-    }
-    
-}
 extension AddViewController {
     func getMixAIResponse() {
         self.firstTextFiled.resignFirstResponder()

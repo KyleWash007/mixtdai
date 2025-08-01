@@ -468,7 +468,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="t6c-pF-Tdm">
-                                <rect key="frame" x="0.0" y="182" width="393" height="602"/>
+                                <rect key="frame" x="0.0" y="182" width="393" height="545"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="arV-Zt-dMs">
@@ -488,7 +488,7 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <action selector="nextAction:" destination="N2l-Df-Kvo" eventType="touchUpInside" id="s0j-gE-XgG"/>
+                                    <action selector="postAction:" destination="BIp-a7-W1n" eventType="touchUpInside" id="ZiR-F6-MUm"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -499,15 +499,16 @@
                             <constraint firstItem="t6c-pF-Tdm" firstAttribute="top" secondItem="4Of-Ya-AWP" secondAttribute="bottom" id="4rr-QL-pZi"/>
                             <constraint firstItem="Rjb-sX-nxg" firstAttribute="trailing" secondItem="t6c-pF-Tdm" secondAttribute="trailing" id="Er4-gw-Urr"/>
                             <constraint firstItem="4Of-Ya-AWP" firstAttribute="top" secondItem="Rjb-sX-nxg" secondAttribute="top" id="MQd-i6-R6p"/>
+                            <constraint firstItem="arV-Zt-dMs" firstAttribute="top" secondItem="t6c-pF-Tdm" secondAttribute="bottom" constant="5" id="Wcy-mJ-Ia5"/>
                             <constraint firstItem="4Of-Ya-AWP" firstAttribute="leading" secondItem="Rjb-sX-nxg" secondAttribute="leading" id="YxZ-Sb-0ab"/>
                             <constraint firstItem="Rjb-sX-nxg" firstAttribute="bottom" secondItem="arV-Zt-dMs" secondAttribute="bottom" id="arc-EC-Hyy"/>
                             <constraint firstItem="Rjb-sX-nxg" firstAttribute="trailing" secondItem="arV-Zt-dMs" secondAttribute="trailing" constant="16" id="kIb-s5-eCh"/>
                             <constraint firstItem="Rjb-sX-nxg" firstAttribute="trailing" secondItem="4Of-Ya-AWP" secondAttribute="trailing" id="kJD-69-nhZ"/>
                             <constraint firstItem="t6c-pF-Tdm" firstAttribute="leading" secondItem="Rjb-sX-nxg" secondAttribute="leading" id="pDz-Vc-G4k"/>
-                            <constraint firstItem="Rjb-sX-nxg" firstAttribute="bottom" secondItem="t6c-pF-Tdm" secondAttribute="bottom" id="yvH-zM-HPJ"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="btnNext" destination="arV-Zt-dMs" id="ZaF-Dw-pi5"/>
                         <outlet property="contentView" destination="t6c-pF-Tdm" id="6az-ns-cll"/>
                     </connections>
                 </viewController>

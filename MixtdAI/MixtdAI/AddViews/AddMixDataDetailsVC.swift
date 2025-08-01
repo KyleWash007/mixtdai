@@ -2,6 +2,7 @@ import UIKit
 import SKPhotoBrowser
 
 class AddMixDataDetailsVC: UIViewController {
+    @IBOutlet weak var btnNext: UIButton!
     @IBOutlet weak var contentView: UIView!
     var mix: MixAIResponse!
     var image: URL?
@@ -13,10 +14,30 @@ class AddMixDataDetailsVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTableView()
+        self.btnNext.applyGradient(colors: [
+              UIColor.purple,UIColor.blue
+          ])
     }
 
+    @IBAction func postAction(_ sender: Any) {
+        self.saveAndPostMix()
+    }
+    
     @IBAction func backAction(_ sender: Any) {
-        self.navigationController?.popViewController(animated: true)
+        let alert = UIAlertController(
+            title: "Save and Post",
+            message: "Do you want to save and post this mix?\n\nIf you cancel, you will lose your content.",
+            preferredStyle: .alert
+        )
+
+        alert.addAction(UIAlertAction(title: "Cancel", style: .destructive, handler: nil))
+
+        alert.addAction(UIAlertAction(title: "Save & Post", style: .default, handler: { _ in
+            self.saveAndPostMix()
+            self.navigationController?.popViewController(animated: true)
+        }))
+
+        present(alert, animated: true, completion: nil)
     }
 
     @IBAction func shareAction(_ sender: Any) {
@@ -67,5 +88,11 @@ extension AddMixDataDetailsVC: UITableViewDataSource, UITableViewDelegate {
         }
         self.mixDetailsCell = cell
         return cell
+    }
+}
+extension AddMixDataDetailsVC {
+    func saveAndPostMix() {
+        self.showAlert(message: "Under Development")
+
     }
 }
