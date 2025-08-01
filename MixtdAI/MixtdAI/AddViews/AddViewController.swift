@@ -53,7 +53,6 @@ class AddViewController: UIViewController {
         vc.delegate = self
         seachIndex = 1
         vc.seachTxt = self.firstTextFiled.text ?? ""
-
         self.navigationController?.pushViewController(vc, animated: true)
 
     }
@@ -83,7 +82,9 @@ extension AddViewController {
                 print("Suggested Name: \(mix.suggestedName)")
                 print("Improvement Tip: \(mix.improvementTip)")
                 DispatchQueue.main.async {
-                    self.createAiImage(mix: mix)
+                    self.showDetails(mix: mix,imageul: nil,image: nil)
+
+                    //self.createAiImage(mix: mix)
                 }
 
 //                DispatchQueue.main.async {

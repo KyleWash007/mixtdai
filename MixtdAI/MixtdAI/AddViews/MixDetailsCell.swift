@@ -1,14 +1,23 @@
 import UIKit
 import SKPhotoBrowser
-
-class MixDetailsCell: UITableViewCell {
-
+protocol MixDetailsCellDelegate: AnyObject {
+    func didSelectGenerateByAI(in cell: MixDetailsCell)
+    func didSelectCamera(in cell: MixDetailsCell)
+    func didSelectGallery(in cell: MixDetailsCell)
+    func didSelectView(in cell: MixDetailsCell)
+}
+class MixDetailsCell: UITableViewCell{
+    weak var delegate: MixDetailsCellDelegate?
+    var imageFound = false
     private let stackView = UIStackView()
-    private let mixImageView = UIImageView()
+    let mixImageView = UIImageView()
+    private let photoOverlayIcon = UIImageView()
     private let leftIngredientLabel = UILabel()
     private let rightIngredientLabel = UILabel()
     private let nameLabel = UILabel()
     private var onNameUpdate: ((String) -> Void)?
+    
+    private weak var presentingViewController: UIViewController?
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -64,8 +73,22 @@ class MixDetailsCell: UITableViewCell {
         mixImageView.widthAnchor.constraint(equalToConstant: 160).isActive = true
         mixImageView.isUserInteractionEnabled = true
 
-        let tap = UITapGestureRecognizer(target: self, action: #selector(showImage))
+        // Add tap gesture to open action sheet
+        let tap = UITapGestureRecognizer(target: self, action: #selector(showImageOptions))
         mixImageView.addGestureRecognizer(tap)
+
+        // Add photo icon overlay
+        photoOverlayIcon.translatesAutoresizingMaskIntoConstraints = false
+        photoOverlayIcon.image = UIImage(systemName: "plus.circle.fill")
+        photoOverlayIcon.tintColor = .white
+        mixImageView.addSubview(photoOverlayIcon)
+        photoOverlayIcon.isHidden = true 
+        NSLayoutConstraint.activate([
+            photoOverlayIcon.centerXAnchor.constraint(equalTo: mixImageView.centerXAnchor),
+            photoOverlayIcon.centerYAnchor.constraint(equalTo: mixImageView.centerYAnchor),
+            photoOverlayIcon.widthAnchor.constraint(equalToConstant: 30),
+            photoOverlayIcon.heightAnchor.constraint(equalToConstant: 30)
+        ])
 
         imageRow.addArrangedSubview(leftIngredientLabel)
         imageRow.addArrangedSubview(mixImageView)
@@ -102,7 +125,6 @@ class MixDetailsCell: UITableViewCell {
     func configure(with mix: MixAIResponse, imageURL: URL?, fallbackImage: UIImage?, onNameUpdate: @escaping (String) -> Void) {
         self.onNameUpdate = onNameUpdate
         nameLabel.text = mix.suggestedName
-
         leftIngredientLabel.text = mix.leftIngredient ?? ""
         rightIngredientLabel.text = mix.rightIngredient ?? ""
 
@@ -136,21 +158,44 @@ class MixDetailsCell: UITableViewCell {
                 if let data = data, let image = UIImage(data: data) {
                     DispatchQueue.main.async {
                         self.mixImageView.image = image
+                        self.imageFound = true
                     }
                 }
             }.resume()
         } else if let fallback = fallbackImage {
             mixImageView.image = fallback
+            self.imageFound = true
+        }else {
+            mixImageView.image = UIImage(named: "gnrate")
         }
+
+        // capture presenting view controller
+        presentingViewController = UIApplication.shared.windows.first?.rootViewController
     }
 
-    @objc private func showImage() {
-        guard let image = mixImageView.image else { return }
-        let photo = SKPhoto.photoWithImage(image)
-        let browser = SKPhotoBrowser(photos: [photo])
-        browser.initializePageIndex(0)
-        UIApplication.shared.windows.first?.rootViewController?.present(browser, animated: true)
+    @objc private func showImageOptions() {
+        let alert = UIAlertController(title: "Choose Image", message: nil, preferredStyle: .actionSheet)
+
+        alert.addAction(UIAlertAction(title: "Generate by AI", style: .default, handler: { _ in
+            self.delegate?.didSelectGenerateByAI(in: self)
+        }))
+        alert.addAction(UIAlertAction(title: "Camera", style: .default, handler: { _ in
+            self.delegate?.didSelectCamera(in: self)
+        }))
+        alert.addAction(UIAlertAction(title: "Gallery", style: .default, handler: { _ in
+            self.delegate?.didSelectGallery(in: self)
+        }))
+        if self.imageFound {
+            alert.addAction(UIAlertAction(title: "View", style: .default, handler: { _ in
+                self.delegate?.didSelectView(in: self)
+            }))
+        }
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+
+        presentingViewController?.present(alert, animated: true)
     }
+
+   
 
     @objc private func editSuggestedName() {
         guard let rootVC = UIApplication.shared.windows.first?.rootViewController else { return }
