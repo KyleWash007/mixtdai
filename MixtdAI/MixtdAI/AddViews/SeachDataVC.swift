@@ -1,11 +1,5 @@
-//
-//  SeachDataVC.swift
-//  MixtdAI
-//
-//  Created by Aravind Kumar on 01/08/25.
-//
-
 import UIKit
+
 struct Beer: Codable {
     let name: String?
     let brewery: String?
@@ -21,29 +15,34 @@ class SearchDataVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, 
     private let searchBar = UISearchBar()
     private let tableView = UITableView()
 
-    var beerResults: [[String:Any]] = []
+    var beerResults: [[String: Any]] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        contentView.backgroundColor = .clear
         setupSearchUI()
     }
 
     private func setupSearchUI() {
-        // Add Search Bar
+        // Search Bar Setup
         searchBar.delegate = self
         searchBar.placeholder = "Search Brewery"
+        searchBar.searchTextField.textColor = .white
+        searchBar.searchTextField.backgroundColor = .darkGray
+        searchBar.barStyle = .black
         searchBar.translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview(searchBar)
 
-        // Add Table View
+        // TableView Setup
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.register(BeerTableViewCell.self, forCellReuseIdentifier: "BeerCell")
+        tableView.backgroundColor = .black
+        tableView.separatorStyle = .none
         contentView.addSubview(tableView)
 
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "BeerCell")
-
-        // Layout
+        // Layout Constraints
         NSLayoutConstraint.activate([
             searchBar.topAnchor.constraint(equalTo: contentView.topAnchor),
             searchBar.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
@@ -56,6 +55,22 @@ class SearchDataVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, 
         ])
     }
 
+    // MARK: - TableView Delegates
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return beerResults.count
+    }
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "BeerCell", for: indexPath) as? BeerTableViewCell else {
+            return UITableViewCell()
+        }
+
+        let beer = beerResults[indexPath.row]
+        cell.nameLabel.text = beer["name"] as? String ?? "Unknown Beer"
+        cell.breweryLabel.text = beer["brewery"] as? String ?? "Unknown Brewery"
+        return cell
+    }
+
     // MARK: - Search Bar
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
@@ -63,18 +78,7 @@ class SearchDataVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, 
         fetchBeers(for: query)
     }
 
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return beerResults.count
-    }
-
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let beer = beerResults[indexPath.row]
-        let cell = tableView.dequeueReusableCell(withIdentifier: "BeerCell", for: indexPath)
-        cell.textLabel?.text = beer["name"] as? String ?? "Unknown Beer"
-        cell.detailTextLabel?.text = beer["brewery"] as? String ?? ""
-        return cell
-    }
-    
+    // MARK: - API Call
     func fetchBeers(for brewery: String) {
         let headers = [
             "x-rapidapi-host": "beer9.p.rapidapi.com",
@@ -82,9 +86,7 @@ class SearchDataVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, 
         ]
 
         var components = URLComponents(string: "https://beer9.p.rapidapi.com/")!
-        components.queryItems = [
-            URLQueryItem(name: "brewery", value: brewery)
-        ]
+        components.queryItems = [URLQueryItem(name: "brewery", value: brewery)]
 
         guard let url = components.url else {
             print("Invalid URL")
@@ -108,23 +110,17 @@ class SearchDataVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, 
                 }
 
                 do {
-                    // Convert data to [[String: Any]]
-                    if let dict = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any], let jsonArray =  dict["data"] as? [[String:Any]]{
+                    if let dict = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any],
+                       let jsonArray = dict["data"] as? [[String: Any]] {
                         self.beerResults = jsonArray
-                        print("✅ Parsed Beer Results: \(jsonArray)")
                         self.tableView.reloadData()
                     } else {
-                        print("❌ JSON is not an array of dictionaries")
+                        print("❌ JSON format error")
                     }
                 } catch {
-                    print("❌ JSON parsing error: \(error.localizedDescription)")
-                    if let raw = String(data: data, encoding: .utf8) {
-                        print("⚠️ Raw response: \(raw)")
-                    }
+                    print("JSON Error: \(error.localizedDescription)")
                 }
             }
         }.resume()
     }
-
-
 }

@@ -41,6 +41,7 @@
 		A3986DB12E3939C8009C6F14 /* Share+Pdf.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3986DB02E3939C8009C6F14 /* Share+Pdf.swift */; };
 		A3986DB32E3CCAC0009C6F14 /* MixDetailsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3986DB22E3CCAC0009C6F14 /* MixDetailsCell.swift */; };
 		A3986DB52E3CD435009C6F14 /* SeachDataVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3986DB42E3CD435009C6F14 /* SeachDataVC.swift */; };
+		A3986DB72E3CD971009C6F14 /* BeerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3986DB62E3CD971009C6F14 /* BeerTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -81,6 +82,7 @@
 		A3986DB02E3939C8009C6F14 /* Share+Pdf.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Share+Pdf.swift"; sourceTree = "<group>"; };
 		A3986DB22E3CCAC0009C6F14 /* MixDetailsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MixDetailsCell.swift; sourceTree = "<group>"; };
 		A3986DB42E3CD435009C6F14 /* SeachDataVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeachDataVC.swift; sourceTree = "<group>"; };
+		A3986DB62E3CD971009C6F14 /* BeerTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeerTableViewCell.swift; sourceTree = "<group>"; };
 		BB4703772FCD10C289EEF960 /* Pods_MixtdAI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MixtdAI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BD77AE624F8D58280FCD5C01 /* Pods-MixtdAI.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MixtdAI.release.xcconfig"; path = "Target Support Files/Pods-MixtdAI/Pods-MixtdAI.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -134,6 +136,7 @@
 		A3986D5A2E363917009C6F14 /* AddViews */ = {
 			isa = PBXGroup;
 			children = (
+				A3986DB62E3CD971009C6F14 /* BeerTableViewCell.swift */,
 				A3986DB22E3CCAC0009C6F14 /* MixDetailsCell.swift */,
 				A3986D9B2E3655DB009C6F14 /* AddMixDataDetailsVC.swift */,
 				A3986D572E363917009C6F14 /* AddStoryboard.storyboard */,
@@ -370,6 +373,7 @@
 				A3986D842E363917009C6F14 /* UIImage+Rotate.swift in Sources */,
 				A3986D852E363917009C6F14 /* UIView+extention.swift in Sources */,
 				A3986D862E363917009C6F14 /* UILabel+Extensions.swift in Sources */,
+				A3986DB72E3CD971009C6F14 /* BeerTableViewCell.swift in Sources */,
 				A3986D872E363917009C6F14 /* AddViewController.swift in Sources */,
 				A3986DB32E3CCAC0009C6F14 /* MixDetailsCell.swift in Sources */,
 				A3986D882E363917009C6F14 /* SceneDelegate.swift in Sources */,
