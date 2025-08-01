@@ -29,7 +29,7 @@ class MixDetailsCell: UITableViewCell{
         setupUI()
     }
 
-    private func setupUI() {
+    private func setupUI()  {
         backgroundColor = .black
         selectionStyle = .none
 
@@ -45,44 +45,38 @@ class MixDetailsCell: UITableViewCell{
             stackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16)
         ])
 
-        // Image + Ingredients Row
-        let imageRow = UIStackView()
-        imageRow.axis = .horizontal
-        imageRow.alignment = .center
-        imageRow.spacing = 16
-        imageRow.distribution = .equalCentering
+        // MARK: - Image + Labels Container View
+        let container = UIView()
+        container.translatesAutoresizingMaskIntoConstraints = false
+        stackView.addArrangedSubview(container)
 
-        leftIngredientLabel.textColor = .white
-        leftIngredientLabel.font = .systemFont(ofSize: 14)
-        leftIngredientLabel.numberOfLines = 0
-        leftIngredientLabel.textAlignment = .right
-        leftIngredientLabel.setContentHuggingPriority(.required, for: .horizontal)
-
-        rightIngredientLabel.textColor = .white
-        rightIngredientLabel.font = .systemFont(ofSize: 14)
-        rightIngredientLabel.numberOfLines = 0
-        rightIngredientLabel.textAlignment = .left
-        rightIngredientLabel.setContentHuggingPriority(.required, for: .horizontal)
-
+        // Add mixImageView
         mixImageView.translatesAutoresizingMaskIntoConstraints = false
         mixImageView.contentMode = .scaleAspectFill
         mixImageView.layer.cornerRadius = 80
         mixImageView.clipsToBounds = true
         mixImageView.backgroundColor = .lightGray
-        mixImageView.heightAnchor.constraint(equalToConstant: 160).isActive = true
-        mixImageView.widthAnchor.constraint(equalToConstant: 160).isActive = true
         mixImageView.isUserInteractionEnabled = true
+        container.addSubview(mixImageView)
 
-        // Add tap gesture to open action sheet
+        NSLayoutConstraint.activate([
+            mixImageView.topAnchor.constraint(equalTo: container.topAnchor),
+            mixImageView.trailingAnchor.constraint(equalTo: container.trailingAnchor),
+            mixImageView.widthAnchor.constraint(equalToConstant: 160),
+            mixImageView.heightAnchor.constraint(equalToConstant: 160),
+            mixImageView.bottomAnchor.constraint(lessThanOrEqualTo: container.bottomAnchor)
+        ])
+
         let tap = UITapGestureRecognizer(target: self, action: #selector(showImageOptions))
         mixImageView.addGestureRecognizer(tap)
 
-        // Add photo icon overlay
+        // Overlay icon
         photoOverlayIcon.translatesAutoresizingMaskIntoConstraints = false
         photoOverlayIcon.image = UIImage(systemName: "plus.circle.fill")
         photoOverlayIcon.tintColor = .white
         mixImageView.addSubview(photoOverlayIcon)
-        photoOverlayIcon.isHidden = true 
+        photoOverlayIcon.isHidden = true
+
         NSLayoutConstraint.activate([
             photoOverlayIcon.centerXAnchor.constraint(equalTo: mixImageView.centerXAnchor),
             photoOverlayIcon.centerYAnchor.constraint(equalTo: mixImageView.centerYAnchor),
@@ -90,12 +84,34 @@ class MixDetailsCell: UITableViewCell{
             photoOverlayIcon.heightAnchor.constraint(equalToConstant: 30)
         ])
 
-        imageRow.addArrangedSubview(leftIngredientLabel)
-        imageRow.addArrangedSubview(mixImageView)
-        imageRow.addArrangedSubview(rightIngredientLabel)
-        stackView.addArrangedSubview(imageRow)
+        // Labels Stack (Left Side)
+        let labelStack = UIStackView()
+        labelStack.axis = .vertical
+        labelStack.spacing = 8
+        labelStack.translatesAutoresizingMaskIntoConstraints = false
+        container.addSubview(labelStack)
 
-        // Suggested Name Row
+        leftIngredientLabel.textColor = .white
+        leftIngredientLabel.font = .systemFont(ofSize: 14)
+        leftIngredientLabel.numberOfLines = 0
+        leftIngredientLabel.textAlignment = .left
+
+        rightIngredientLabel.textColor = .white
+        rightIngredientLabel.font = .systemFont(ofSize: 14)
+        rightIngredientLabel.numberOfLines = 0
+        rightIngredientLabel.textAlignment = .left
+
+        labelStack.addArrangedSubview(leftIngredientLabel)
+        labelStack.addArrangedSubview(rightIngredientLabel)
+
+        NSLayoutConstraint.activate([
+            labelStack.leadingAnchor.constraint(equalTo: container.leadingAnchor),
+            labelStack.trailingAnchor.constraint(equalTo: mixImageView.leadingAnchor, constant: -16),
+            labelStack.topAnchor.constraint(equalTo: mixImageView.topAnchor),
+            labelStack.bottomAnchor.constraint(lessThanOrEqualTo: container.bottomAnchor)
+        ])
+
+        // MARK: - Suggested Name Row
         let titleRow = UIStackView()
         titleRow.axis = .horizontal
         titleRow.spacing = 8
@@ -121,6 +137,7 @@ class MixDetailsCell: UITableViewCell{
         nameLabel.font = .systemFont(ofSize: 16)
         stackView.addArrangedSubview(nameLabel)
     }
+
 
     func configure(with mix: MixAIResponse, imageURL: URL?, fallbackImage: UIImage?, onNameUpdate: @escaping (String) -> Void) {
         self.onNameUpdate = onNameUpdate

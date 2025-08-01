@@ -31,7 +31,7 @@ class LoaderAnimationView: UIView {
         return imageView
     }()
     
-    private let messageLabel: UILabel = {
+     let messageLabel: UILabel = {
         let label = UILabel()
         label.text = "Your mix is being imagined and analyzed"
         label.textColor = .white

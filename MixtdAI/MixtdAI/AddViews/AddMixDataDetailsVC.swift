@@ -121,7 +121,8 @@ extension AddMixDataDetailsVC: MixDetailsCellDelegate,UIImagePickerControllerDel
         }
         view.addSubview( self.loaderAnimationView!)
         self.loaderAnimationView?.startAnimation()
-        
+        self.loaderAnimationView?.messageLabel.text = "Generating your mix image, please wait..."
+
         self.chatService.generateImageURL(from: "Create a combined circular colorfull tansparant logo of \(self.mix.leftIngredient ?? "") and \(self.mix.rightIngredient ?? "")") { imageResult in
             switch imageResult {
             case .success(let imageURL):
