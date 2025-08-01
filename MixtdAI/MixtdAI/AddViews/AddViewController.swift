@@ -47,6 +47,14 @@ class AddViewController: UIViewController {
         self.getMixAIResponse()
 
     }
+    @IBAction func firstMixtureSeach(_ sender: Any) {
+        
+        let vc = UIStoryboard(name: "AddStoryboard", bundle: nil).instantiateViewController(withIdentifier: "SearchDataVC") as! SearchDataVC
+        self.navigationController?.pushViewController(vc, animated: true)
+
+    }
+    @IBAction func secondMixtureSeach(_ sender: Any) {
+    }
 }
 
 extension AddViewController {
