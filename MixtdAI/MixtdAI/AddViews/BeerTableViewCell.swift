@@ -4,7 +4,6 @@ class BeerTableViewCell: UITableViewCell {
 
     let nameLabel = UILabel()
     let breweryLabel = UILabel()
-    private let arrowImageView = UIImageView()
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -18,37 +17,35 @@ class BeerTableViewCell: UITableViewCell {
 
     private func setupViews() {
         backgroundColor = .black
+        selectionStyle = .none
 
+        // Name label setup
         nameLabel.font = UIFont.boldSystemFont(ofSize: 14)
         nameLabel.textColor = .white
+        nameLabel.numberOfLines = 2
+        nameLabel.lineBreakMode = .byTruncatingTail
         nameLabel.translatesAutoresizingMaskIntoConstraints = false
 
+        // Brewery label setup
         breweryLabel.font = UIFont.systemFont(ofSize: 12)
-        breweryLabel.textColor = .white
+        breweryLabel.textColor = .lightGray
+        breweryLabel.numberOfLines = 1
         breweryLabel.translatesAutoresizingMaskIntoConstraints = false
 
-        arrowImageView.image = UIImage(systemName: "chevron.right")
-        arrowImageView.tintColor = .white
-        arrowImageView.translatesAutoresizingMaskIntoConstraints = false
-
+        // Add views
         contentView.addSubview(nameLabel)
         contentView.addSubview(breweryLabel)
-        contentView.addSubview(arrowImageView)
 
+        // Layout constraints
         NSLayoutConstraint.activate([
-            arrowImageView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
-            arrowImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
-            arrowImageView.widthAnchor.constraint(equalToConstant: 12),
-            arrowImageView.heightAnchor.constraint(equalToConstant: 16),
-
-            nameLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8),
+            nameLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 20),
             nameLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
-            nameLabel.trailingAnchor.constraint(equalTo: arrowImageView.leadingAnchor, constant: -8),
+            nameLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
 
-            breweryLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 4),
+            breweryLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 6),
             breweryLabel.leadingAnchor.constraint(equalTo: nameLabel.leadingAnchor),
             breweryLabel.trailingAnchor.constraint(equalTo: nameLabel.trailingAnchor),
-            breweryLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8)
+            breweryLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10)
         ])
     }
 }

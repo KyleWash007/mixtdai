@@ -8,6 +8,13 @@ struct Beer: Codable {
     let ibu: String?
 }
 
+import UIKit
+
+// MARK: - Delegate Protocol
+protocol SearchDataDelegate: AnyObject {
+    func didSelectBeer(_ beer: Beer)
+}
+
 class SearchDataVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet weak var contentView: UIView!
@@ -16,7 +23,8 @@ class SearchDataVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, 
     private let tableView = UITableView()
 
     var beerResults: [[String: Any]] = []
-
+    weak var delegate: SearchDataDelegate?
+    var seachTxt = ""
     override func viewDidLoad() {
         super.viewDidLoad()
         contentView.backgroundColor = .clear
@@ -27,11 +35,29 @@ class SearchDataVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, 
         // Search Bar Setup
         searchBar.delegate = self
         searchBar.placeholder = "Search Brewery"
-        searchBar.searchTextField.textColor = .white
-        searchBar.searchTextField.backgroundColor = .darkGray
+
+        // Customize the search text field
+        let textField = searchBar.searchTextField
+        textField.textColor = .white
+        textField.tintColor = .white
+        textField.backgroundColor = UIColor(named: "darkBg") // Optional: to style the input field background
+
+        textField.attributedPlaceholder = NSAttributedString(
+            string: "Search Brewery",
+            attributes: [.foregroundColor: UIColor.white.withAlphaComponent(0.6)]
+        )
+
+        // Bar style (for keyboard appearance, etc.)
         searchBar.barStyle = .black
+
+        // Background color of the whole search bar
+        searchBar.backgroundColor = UIColor(named: "darkBg")
+
+        // Layout
         searchBar.translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview(searchBar)
+
+        
 
         // TableView Setup
         tableView.translatesAutoresizingMaskIntoConstraints = false
@@ -42,7 +68,6 @@ class SearchDataVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, 
         tableView.separatorStyle = .none
         contentView.addSubview(tableView)
 
-        // Layout Constraints
         NSLayoutConstraint.activate([
             searchBar.topAnchor.constraint(equalTo: contentView.topAnchor),
             searchBar.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
@@ -53,8 +78,22 @@ class SearchDataVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, 
             tableView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             tableView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
         ])
+        // Pre-fill text if available
+           if !seachTxt.isEmpty {
+               searchBar.text = seachTxt
+               fetchBeers(for: seachTxt)
+           }
     }
-
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        if seachTxt.isEmpty {
+            searchBar.becomeFirstResponder()
+        }
+    }
+    @IBAction func backAction(_ sender: Any) {
+        self.navigationController?.popViewController(animated: true)
+    }
     // MARK: - TableView Delegates
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return beerResults.count
@@ -71,6 +110,19 @@ class SearchDataVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, 
         return cell
     }
 
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let dict = beerResults[indexPath.row]
+        let selectedBeer = Beer(
+            name: dict["name"] as? String,
+            brewery: dict["brewery"] as? String,
+            style: dict["style"] as? String,
+            abv: dict["abv"] as? String,
+            ibu: dict["ibu"] as? String
+        )
+        delegate?.didSelectBeer(selectedBeer)
+        navigationController?.popViewController(animated: true)
+    }
+
     // MARK: - Search Bar
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
@@ -80,6 +132,7 @@ class SearchDataVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, 
 
     // MARK: - API Call
     func fetchBeers(for brewery: String) {
+        HUDManager.showHUD()
         let headers = [
             "x-rapidapi-host": "beer9.p.rapidapi.com",
             "x-rapidapi-key": "b0665838dcmshf4226f990b06eb8p115074jsn547e69b46639"
@@ -98,6 +151,7 @@ class SearchDataVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, 
         request.allHTTPHeaderFields = headers
 
         URLSession.shared.dataTask(with: request) { data, response, error in
+            HUDManager.hideHUD()
             DispatchQueue.main.async {
                 if let error = error {
                     print("Error: \(error.localizedDescription)")
@@ -116,9 +170,15 @@ class SearchDataVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, 
                         self.tableView.reloadData()
                     } else {
                         print("❌ JSON format error")
+                        if let jsonString = String(data: data, encoding: .utf8) {
+                            print("📦 Raw JSON Response:\n\(jsonString)")
+                        }
                     }
                 } catch {
                     print("JSON Error: \(error.localizedDescription)")
+                    if let jsonString = String(data: data, encoding: .utf8) {
+                        print("📦 Raw JSON Response:\n\(jsonString)")
+                    }
                 }
             }
         }.resume()

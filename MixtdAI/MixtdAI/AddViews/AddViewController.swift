@@ -10,7 +10,7 @@ import UIKit
 class AddViewController: UIViewController {
     @IBOutlet weak var firstTextFiled: UITextField!
     @IBOutlet weak var secondTextFiled: UITextField!
-
+    var seachIndex = 1
     var tappedmeta: Int = 1
     var loaderAnimationView:LoaderAnimationView?
     private let chatService = ChatGPTService()
@@ -50,10 +50,19 @@ class AddViewController: UIViewController {
     @IBAction func firstMixtureSeach(_ sender: Any) {
         
         let vc = UIStoryboard(name: "AddStoryboard", bundle: nil).instantiateViewController(withIdentifier: "SearchDataVC") as! SearchDataVC
+        vc.delegate = self
+        seachIndex = 1
+        vc.seachTxt = self.firstTextFiled.text ?? ""
+
         self.navigationController?.pushViewController(vc, animated: true)
 
     }
     @IBAction func secondMixtureSeach(_ sender: Any) {
+        let vc = UIStoryboard(name: "AddStoryboard", bundle: nil).instantiateViewController(withIdentifier: "SearchDataVC") as! SearchDataVC
+        vc.delegate = self
+        vc.seachTxt = self.secondTextFiled.text ?? ""
+        seachIndex = 2
+        self.navigationController?.pushViewController(vc, animated: true)
     }
 }
 
@@ -170,5 +179,19 @@ extension AddViewController : UITextFieldDelegate {
         }
         return true
     }
+    
+}
+extension AddViewController : SearchDataDelegate {
+    func didSelectBeer(_ beer: Beer) {
+        print("🍺 Selected Beer: \(beer.name ?? "Unknown") from \(beer.brewery ?? "")")
+
+        if self.seachIndex == 1 {
+            self.firstTextFiled.text = beer.name
+        }else {
+            self.secondTextFiled.text = beer.name
+
+        }
+    }
+    
     
 }

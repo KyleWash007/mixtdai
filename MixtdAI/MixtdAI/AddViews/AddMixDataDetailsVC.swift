@@ -25,16 +25,18 @@ class AddMixDataDetailsVC: UIViewController {
     
     @IBAction func backAction(_ sender: Any) {
         let alert = UIAlertController(
-            title: "Save and Post",
-            message: "Do you want to save and post this mix?\n\nIf you cancel, you will lose your content.",
+            title: "Do you want to save and post this mix?",
+            message: "If you cancel, you will lose your content.",
             preferredStyle: .alert
         )
 
-        alert.addAction(UIAlertAction(title: "Cancel", style: .destructive, handler: nil))
 
+        alert.addAction(UIAlertAction(title: "Cancel", style: .destructive, handler: { _ in
+            self.navigationController?.popViewController(animated: true)
+        }))
+        
         alert.addAction(UIAlertAction(title: "Save & Post", style: .default, handler: { _ in
             self.saveAndPostMix()
-            self.navigationController?.popViewController(animated: true)
         }))
 
         present(alert, animated: true, completion: nil)
