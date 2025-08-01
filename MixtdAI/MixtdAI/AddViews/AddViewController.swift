@@ -113,8 +113,7 @@ extension AddViewController {
                      case .failure(let error):
                          print("Image generation failed: \(error)")
                          DispatchQueue.main.async {
-                             let combined = HUDManager.mergeImagesWithSmoothBlend(image1: self.metadata1!.image!, image2: self.metadata2!.image!)
-                             self.showDetails(mix: mix,imageul: nil,image: combined)
+                             self.showDetails(mix: mix,imageul: nil,image: nil)
                          }
                      }
                  }
@@ -126,8 +125,11 @@ extension AddViewController {
             self.loaderAnimationView?.removeFromSuperview()
             
             let mixVC = UIStoryboard(name: "AddStoryboard", bundle: nil).instantiateViewController(withIdentifier: "AddMixDataDetailsVC") as! AddMixDataDetailsVC
-            mixVC.mix = mix
             mixVC.image = imageul
+            mix.leftIngredient = self.firstTextFiled.text ?? ""
+            mix.rightIngredient = self.secondTextFiled.text ?? ""
+            mixVC.mix = mix
+
             if let image {
                 mixVC.imageViewShow = image
                 mixVC.imageData = image.pngData()

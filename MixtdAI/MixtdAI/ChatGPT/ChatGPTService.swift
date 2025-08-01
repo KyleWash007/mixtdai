@@ -207,4 +207,7 @@ class MixAIResponse: Codable {
     let recommendedRatio: String
     var suggestedName: String
     let improvementTip: String
+    var leftIngredient:String?
+    var rightIngredient:String?
+
 }

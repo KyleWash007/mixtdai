@@ -5,6 +5,8 @@ class MixDetailsCell: UITableViewCell {
 
     private let stackView = UIStackView()
     private let mixImageView = UIImageView()
+    private let leftIngredientLabel = UILabel()
+    private let rightIngredientLabel = UILabel()
     private let nameLabel = UILabel()
     private var onNameUpdate: ((String) -> Void)?
 
@@ -25,7 +27,6 @@ class MixDetailsCell: UITableViewCell {
         stackView.axis = .vertical
         stackView.spacing = 16
         stackView.translatesAutoresizingMaskIntoConstraints = false
-
         contentView.addSubview(stackView)
 
         NSLayoutConstraint.activate([
@@ -35,7 +36,25 @@ class MixDetailsCell: UITableViewCell {
             stackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16)
         ])
 
-        // Image
+        // Image + Ingredients Row
+        let imageRow = UIStackView()
+        imageRow.axis = .horizontal
+        imageRow.alignment = .center
+        imageRow.spacing = 16
+        imageRow.distribution = .equalCentering
+
+        leftIngredientLabel.textColor = .white
+        leftIngredientLabel.font = .systemFont(ofSize: 14)
+        leftIngredientLabel.numberOfLines = 0
+        leftIngredientLabel.textAlignment = .right
+        leftIngredientLabel.setContentHuggingPriority(.required, for: .horizontal)
+
+        rightIngredientLabel.textColor = .white
+        rightIngredientLabel.font = .systemFont(ofSize: 14)
+        rightIngredientLabel.numberOfLines = 0
+        rightIngredientLabel.textAlignment = .left
+        rightIngredientLabel.setContentHuggingPriority(.required, for: .horizontal)
+
         mixImageView.translatesAutoresizingMaskIntoConstraints = false
         mixImageView.contentMode = .scaleAspectFill
         mixImageView.layer.cornerRadius = 80
@@ -48,16 +67,10 @@ class MixDetailsCell: UITableViewCell {
         let tap = UITapGestureRecognizer(target: self, action: #selector(showImage))
         mixImageView.addGestureRecognizer(tap)
 
-        let imageContainer = UIView()
-        imageContainer.addSubview(mixImageView)
-
-        NSLayoutConstraint.activate([
-            mixImageView.centerXAnchor.constraint(equalTo: imageContainer.centerXAnchor),
-            mixImageView.topAnchor.constraint(equalTo: imageContainer.topAnchor),
-            mixImageView.bottomAnchor.constraint(equalTo: imageContainer.bottomAnchor)
-        ])
-
-        stackView.addArrangedSubview(imageContainer)
+        imageRow.addArrangedSubview(leftIngredientLabel)
+        imageRow.addArrangedSubview(mixImageView)
+        imageRow.addArrangedSubview(rightIngredientLabel)
+        stackView.addArrangedSubview(imageRow)
 
         // Suggested Name Row
         let titleRow = UIStackView()
@@ -89,6 +102,9 @@ class MixDetailsCell: UITableViewCell {
     func configure(with mix: MixAIResponse, imageURL: URL?, fallbackImage: UIImage?, onNameUpdate: @escaping (String) -> Void) {
         self.onNameUpdate = onNameUpdate
         nameLabel.text = mix.suggestedName
+
+        leftIngredientLabel.text = mix.leftIngredient ?? ""
+        rightIngredientLabel.text = mix.rightIngredient ?? ""
 
         let items: [(String, String)] = [
             ("✨ What You Will Experience", mix.experience),
