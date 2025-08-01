@@ -25,7 +25,7 @@ extension UIView {
 class LoaderAnimationView: UIView {
     
     private let logoImageView: UIImageView = {
-        let imageView = UIImageView(image: UIImage(named: "mixtdlogo"))
+        let imageView = UIImageView(image: UIImage(named: "logoT"))
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.contentMode = .scaleAspectFit
         return imageView

@@ -28,12 +28,9 @@ class AddViewController: UIViewController {
         super.viewDidLoad()
         
         UIApplication.shared.isIdleTimerDisabled = true
-
         self.btnNext.applyGradient(colors: [
               UIColor.purple,UIColor.blue
           ])
-        self.view.showAnimationLayerView(color: .random)
-
     }
     
     @IBAction func stepAction1(_ sender: Any) {

@@ -471,14 +471,37 @@
                                 <rect key="frame" x="0.0" y="182" width="393" height="602"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="arV-Zt-dMs">
+                                <rect key="frame" x="16" y="732" width="361" height="52"/>
+                                <color key="backgroundColor" red="0.062745098040000002" green="0.47058823529999999" blue="0.81176470590000005" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="52" id="YEo-fK-XyL"/>
+                                </constraints>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Next">
+                                    <fontDescription key="titleFontDescription" type="boldSystem" pointSize="20"/>
+                                </buttonConfiguration>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="22"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="nextAction:" destination="N2l-Df-Kvo" eventType="touchUpInside" id="s0j-gE-XgG"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Rjb-sX-nxg"/>
                         <color key="backgroundColor" name="Black"/>
                         <constraints>
+                            <constraint firstItem="arV-Zt-dMs" firstAttribute="leading" secondItem="Rjb-sX-nxg" secondAttribute="leading" constant="16" id="4A1-AP-QAm"/>
                             <constraint firstItem="t6c-pF-Tdm" firstAttribute="top" secondItem="4Of-Ya-AWP" secondAttribute="bottom" id="4rr-QL-pZi"/>
                             <constraint firstItem="Rjb-sX-nxg" firstAttribute="trailing" secondItem="t6c-pF-Tdm" secondAttribute="trailing" id="Er4-gw-Urr"/>
                             <constraint firstItem="4Of-Ya-AWP" firstAttribute="top" secondItem="Rjb-sX-nxg" secondAttribute="top" id="MQd-i6-R6p"/>
                             <constraint firstItem="4Of-Ya-AWP" firstAttribute="leading" secondItem="Rjb-sX-nxg" secondAttribute="leading" id="YxZ-Sb-0ab"/>
+                            <constraint firstItem="Rjb-sX-nxg" firstAttribute="bottom" secondItem="arV-Zt-dMs" secondAttribute="bottom" id="arc-EC-Hyy"/>
+                            <constraint firstItem="Rjb-sX-nxg" firstAttribute="trailing" secondItem="arV-Zt-dMs" secondAttribute="trailing" constant="16" id="kIb-s5-eCh"/>
                             <constraint firstItem="Rjb-sX-nxg" firstAttribute="trailing" secondItem="4Of-Ya-AWP" secondAttribute="trailing" id="kJD-69-nhZ"/>
                             <constraint firstItem="t6c-pF-Tdm" firstAttribute="leading" secondItem="Rjb-sX-nxg" secondAttribute="leading" id="pDz-Vc-G4k"/>
                             <constraint firstItem="Rjb-sX-nxg" firstAttribute="bottom" secondItem="t6c-pF-Tdm" secondAttribute="bottom" id="yvH-zM-HPJ"/>
@@ -506,7 +529,7 @@
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="WhiteAlpha">
-            <color red="1" green="1" blue="1" alpha="0.80000000000000004" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="1" green="1" blue="1" alpha="0.80000001192092896" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="darkBg">
             <color red="0.10980392156862745" green="0.10980392156862745" blue="0.11764705882352941" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

@@ -200,11 +200,11 @@ struct MessageSim: Codable {
     let content: String
 }
 
-struct MixAIResponse: Codable {
+class MixAIResponse: Codable {
     let experience: String
     let science: String
     let similarTo: String
     let recommendedRatio: String
-    let suggestedName: String
+    var suggestedName: String
     let improvementTip: String
 }
