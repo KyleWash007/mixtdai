@@ -191,26 +191,30 @@ class MixDetailsCell: UITableViewCell{
     }
 
     @objc private func showImageOptions() {
-        let alert = UIAlertController(title: "Choose Image", message: nil, preferredStyle: .actionSheet)
+        self.delegate?.didSelectGenerateByAI(in: self)
 
-        alert.addAction(UIAlertAction(title: "Generate by AI", style: .default, handler: { _ in
-            self.delegate?.didSelectGenerateByAI(in: self)
-        }))
-        alert.addAction(UIAlertAction(title: "Camera", style: .default, handler: { _ in
-            self.delegate?.didSelectCamera(in: self)
-        }))
-        alert.addAction(UIAlertAction(title: "Gallery", style: .default, handler: { _ in
-            self.delegate?.didSelectGallery(in: self)
-        }))
-        if self.imageFound {
-            alert.addAction(UIAlertAction(title: "View", style: .default, handler: { _ in
-                self.delegate?.didSelectView(in: self)
-            }))
-        }
-        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
-
-        presentingViewController?.present(alert, animated: true)
     }
+//    {
+//        let alert = UIAlertController(title: "Choose Image", message: nil, preferredStyle: .actionSheet)
+//
+//        alert.addAction(UIAlertAction(title: "Generate by AI", style: .default, handler: { _ in
+//            self.delegate?.didSelectGenerateByAI(in: self)
+//        }))
+//        alert.addAction(UIAlertAction(title: "Camera", style: .default, handler: { _ in
+//            self.delegate?.didSelectCamera(in: self)
+//        }))
+//        alert.addAction(UIAlertAction(title: "Gallery", style: .default, handler: { _ in
+//            self.delegate?.didSelectGallery(in: self)
+//        }))
+//        if self.imageFound {
+//            alert.addAction(UIAlertAction(title: "View", style: .default, handler: { _ in
+//                self.delegate?.didSelectView(in: self)
+//            }))
+//        }
+//        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+//
+//        presentingViewController?.present(alert, animated: true)
+//    }
 
    
 
